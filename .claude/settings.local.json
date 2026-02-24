@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(pnpm dlx:*)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm astro:*)",
+      "Bash(pkill:*)",
+      "WebFetch(domain:cheese-nan.hatenablog.com)",
+      "Bash(git add:*)"
+    ]
+  }
+}
