@@ -36,13 +36,13 @@ const sampleBanners = {
 	],
 };
 export const siteConfig: SiteConfig = {
-	title: "チーズナン",
-	subtitle: "Hirokatsuのポートフォリオとブログ",
+	title: "ナンでもメモ",
+	subtitle: "Hirokatsuのメモとポートフォリオ",
 	description:
-		"東京で活動しているフリーランスのフロントエンドエンジニア、Hirokatsuのポートフォリオとブログです。",
+		"東京で活動しているフリーランスのフロントエンドエンジニア、Hirokatsuのメモとポートフォリオです。",
 	// カスタムドメインは使わない。公開先は Cloudflare Pages のこのURL。
 	siteURL: "https://cheese-nan.pages.dev",
-	keywords: ["チーズナン", "Hirokatsu", "フロントエンド", "フリーランス", "東京"],
+	keywords: ["ナンでもメモ", "チーズナン", "Hirokatsu", "フロントエンド", "フリーランス", "東京"],
 	// Search Console の「HTMLタグ」方式。content の値だけを入れる。空ならタグは出さない。
 	googleSiteVerification: "",
 	// TODO: このサイトを公開した日に合わせて変える。サイドバーの稼働日数に使う。
@@ -73,7 +73,7 @@ export const siteConfig: SiteConfig = {
 	// 顶栏标题配置
 	navbarTitle: {
 		mode: "text-icon",
-		text: "チーズナン",
+		text: "ナンでもメモ",
 		icon: "assets/home/home.png",
 		// TODO: ロゴ画像を用意したら mode を "logo" にして、このパスを差し替える
 		logo: "/assets/sample/mark.png",
@@ -165,7 +165,7 @@ export const siteConfig: SiteConfig = {
 
 		homeText: {
 			enable: true,
-			title: "チーズナン",
+			title: "ナンでもメモ",
 			subtitle: ["東京で、フロントエンドをやっています。"],
 			typewriter: {
 				enable: false,
@@ -517,7 +517,7 @@ export const pioConfig: import("./types/config").PioConfig = {
 	mode: "draggable", // 默认为可拖拽模式
 	hiddenOnMobile: true, // 默认在移动设备上隐藏
 	dialog: {
-		welcome: "チーズナンです。",
+		welcome: "ナンでもメモです。",
 		touch: ["そこは触らないでください。"],
 		home: "ホームに戻る",
 		skin: ["着替えはありません。", "このままです。"],
