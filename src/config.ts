@@ -22,10 +22,17 @@ import { LinkPreset } from "./types/config";
 const SITE_LANG = "ja"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
 export const siteConfig: SiteConfig = {
-	title: "cheese-nan", // TODO: サイト名を変更してください
-	subtitle: "", // TODO: サブタイトルを設定してください
-	siteURL: "https://cheese-nan.pages.dev/", // TODO: 実際のCloudflare PagesのURLに変更してください
-	siteStartDate: "2025-01-01", // 站点开始运行日期，用于站点统计组件计算运行天数
+	title: "チーズナン",
+	subtitle: "Hirokatsuのポートフォリオとブログ",
+	description:
+		"東京で活動しているフリーランスのフロントエンドエンジニア、Hirokatsuのポートフォリオとブログです。",
+	// カスタムドメインは使わない。公開先は Cloudflare Pages のこのURL。
+	siteURL: "https://cheese-nan.pages.dev",
+	keywords: ["チーズナン", "Hirokatsu", "フロントエンド", "フリーランス", "東京"],
+	// Search Console の「HTMLタグ」方式。content の値だけを入れる。空ならタグは出さない。
+	googleSiteVerification: "",
+	// TODO: このサイトを公開した日に合わせて変える。サイドバーの稼働日数に使う。
+	siteStartDate: "2026-10-23",
 
 	timeZone: SITE_TIMEZONE,
 
@@ -36,27 +43,25 @@ export const siteConfig: SiteConfig = {
 		fixed: false,
 	},
 
-	// 特色页面开关配置（关闭未使用的页面有助于提升 SEO，关闭后请记得在 navbarConfig 中移除对应链接）
+	// テーマ付属のページ。中身がサンプルのものは閉じている。
+	// 実在のデータを入れてから true にし、navBarConfig にもリンクを足す。
 	featurePages: {
-		anime: true, // 番剧页面开关
-		diary: true, // 日记页面开关
-		friends: true, // 友链页面开关
-		projects: true, // 项目页面开关
-		skills: true, // 技能页面开关
-		timeline: true, // 时间线页面开关
-		albums: true, // 相册页面开关
-		devices: true, // 设备页面开关
+		anime: false,
+		diary: false,
+		friends: false,
+		projects: true,
+		skills: false, // src/data/skills.ts はテーマの記入例。公開しない。
+		timeline: false, // src/data/timeline.ts は別人の経歴。公開しない。
+		albums: false,
+		devices: false,
 	},
 
 	// 顶栏标题配置
 	navbarTitle: {
-		// 显示模式："text-icon" 显示图标+文本，"logo" 仅显示Logo
-		mode: "logo",
-		// 顶栏标题文本
-		text: "MizukiUI",
-		// 顶栏标题图标路径，默认使用 public/assets/home/home.png
+		mode: "text-icon",
+		text: "チーズナン",
 		icon: "assets/home/home.png",
-		// 网站Logo图片路径
+		// TODO: ロゴ画像を用意したら mode を "logo" にして、このパスを差し替える
 		logo: "assets/home/default-logo.png",
 	},
 
@@ -116,6 +121,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	banner: {
+		// TODO: テーマ同梱の画像のまま。自分の写真に差し替える。
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
 		src: {
 			desktop: [
@@ -159,22 +165,14 @@ export const siteConfig: SiteConfig = {
 		// 请自行搭建API
 
 		homeText: {
-			enable: true, // 在主页显示自定义文本
-			title: "わたしの部屋", // 主页横幅主标题
-
-			subtitle: [
-				"特別なことはないけど、君がいると十分です",
-				"今でもあなたは私の光",
-				"君ってさ、知らないうちに私の毎日になってたよ",
-				"君と話すと、なんか毎日がちょっと楽しくなるんだ",
-				"今日はなんでもない日。でも、ちょっとだけいい日",
-			],
+			enable: true,
+			title: "チーズナン",
+			subtitle: ["東京で、フロントエンドをやっています。"],
 			typewriter: {
-				enable: true, // 启用副标题打字机效果
-
-				speed: 100, // 打字速度（毫秒）
-				deleteSpeed: 50, // 删除速度（毫秒）
-				pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
+				enable: false,
+				speed: 100,
+				deleteSpeed: 50,
+				pauseTime: 2000,
 			},
 		},
 
@@ -261,102 +259,31 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		// 支持自定义导航栏链接，支持多级菜单
+		LinkPreset.Projects,
+		LinkPreset.About,
 		{
-			name: "Links",
-			url: "/links/",
-			icon: "material-symbols:link",
-			children: [
-				{
-					name: "GitHub",
-					url: "https://github.com/713ikarosu",
-					external: true,
-					icon: "fa7-brands:github",
-				},
-				{
-					name: "Twitter",
-					url: "https://twitter.com/", // TODO: TwitterのURLを設定してください
-					external: true,
-					icon: "fa7-brands:x-twitter",
-				},
-			],
+			name: "GitHub",
+			url: "https://github.com/713ikarosu",
+			external: true,
+			icon: "fa7-brands:github",
 		},
-		{
-			name: "My",
-			url: "/content/",
-			icon: "material-symbols:person",
-			children: [
-				{
-					name: "Anime",
-					url: "/anime/",
-					icon: "material-symbols:movie",
-				},
-				{
-					name: "Diary",
-					url: "/diary/",
-					icon: "material-symbols:book",
-				},
-				{
-					name: "Gallery",
-					url: "/albums/",
-					icon: "material-symbols:photo-library",
-				},
-				{
-					name: "Devices",
-					url: "devices/",
-					icon: "material-symbols:devices",
-					external: false,
-				},
-			],
-		},
-		{
-			name: "About",
-			url: "/content/",
-			icon: "material-symbols:info",
-			children: [
-				{
-					name: "About",
-					url: "/about/",
-					icon: "material-symbols:person",
-				},
-				{
-					name: "Friends",
-					url: "/friends/",
-					icon: "material-symbols:group",
-				},
-			],
-		},
-		{
-			name: "Others",
-			url: "#",
-			icon: "material-symbols:more-horiz",
-			children: [
-				{
-					name: "Projects",
-					url: "/projects/",
-					icon: "material-symbols:work",
-				},
-				{
-					name: "Skills",
-					url: "/skills/",
-					icon: "material-symbols:psychology",
-				},
-				{
-					name: "Timeline",
-					url: "/timeline/",
-					icon: "material-symbols:timeline",
-				},
-			],
-		},
+		// TODO: X（Twitter）のURLが分かったら足す
+		// {
+		// 	name: "X",
+		// 	url: "https://x.com/TODO",
+		// 	external: true,
+		// 	icon: "fa7-brands:x-twitter",
+		// },
 	],
 };
 
 export const profileConfig: ProfileConfig = {
+	// TODO: 自分の写真かアイコンに差し替える。いまの画像は仮の頭文字。
 	avatar: "assets/images/avatar.webp",
-	name: "cheese-nan", // TODO: 表示名を変更してください
-	bio: "", // TODO: 自己紹介文を設定してください
+	name: "Hirokatsu",
+	bio: "東京のフリーランスフロントエンドエンジニア。2026年7月開業。",
 	typewriter: {
-		enable: true,
+		enable: false,
 		speed: 80,
 	},
 	links: [
@@ -365,11 +292,10 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa7-brands:github",
 			url: "https://github.com/713ikarosu",
 		},
-		{
-			name: "Twitter",
-			icon: "fa7-brands:x-twitter",
-			url: "https://twitter.com/", // TODO: TwitterのURLを設定してください
-		},
+		// TODO: メールが決まったら追加する
+		// { name: "Email", icon: "material-symbols:mail", url: "mailto:TODO" },
+		// TODO: X（Twitter）のURLが決まったら追加する
+		// { name: "X", icon: "fa7-brands:x-twitter", url: "https://x.com/TODO" },
 	],
 };
 
@@ -426,19 +352,20 @@ export const shareConfig: ShareConfig = {
 };
 
 export const announcementConfig: AnnouncementConfig = {
-	title: "",
-	content: "", // TODO: お知らせを設定（空のままでも可）
+	title: "お知らせ",
+	content:
+		"2026年7月にフリーランスとして開業しました。仕事の記録を、ここに書いていきます。",
 	closable: true,
 	link: {
-		enable: false,
-		text: "詳しく見る",
+		enable: true,
+		text: "プロフィール",
 		url: "/about/",
 		external: false,
 	},
 };
 
 export const musicPlayerConfig: MusicPlayerConfig = {
-	enable: true, // 启用音乐播放器功能
+	enable: false, // プレイリストが未定なので閉じている。自分のIDが決まったら true にする
 	mode: "meting", // 音乐播放器模式，可选 "local" 或 "meting"
 	meting_api:
 		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址
@@ -595,7 +522,7 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: true, // 启用看板娘
+	enable: false, // テーマ付属の看板娘。文言もテンプレートのままなので閉じている
 	models: ["/pio/models/pio/model.json"], // 默认模型路径
 	position: "left", // 模型位置
 	width: 280, // 默认宽度
@@ -603,17 +530,12 @@ export const pioConfig: import("./types/config").PioConfig = {
 	mode: "draggable", // 默认为可拖拽模式
 	hiddenOnMobile: true, // 默认在移动设备上隐藏
 	dialog: {
-		welcome: "Welcome to Mizuki Website!", // 欢迎词
-		touch: [
-			"What are you doing?",
-			"Stop touching me!",
-			"HENTAI!",
-			"Don't bully me like that!",
-		], // 触摸提示
-		home: "Click here to go back to homepage!", // 首页提示
-		skin: ["Want to see my new outfit?", "The new outfit looks great~"], // 换装提示
-		close: "QWQ See you next time~", // 关闭提示
-		link: "https://github.com/matsuzaka-yuki/Mizuki", // 关于链接
+		welcome: "チーズナンです。",
+		touch: ["そこは触らないでください。"],
+		home: "ホームに戻る",
+		skin: ["着替えはありません。", "このままです。"],
+		close: "また来てください。",
+		link: "/about/",
 	},
 };
 

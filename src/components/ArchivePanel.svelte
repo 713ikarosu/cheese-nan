@@ -8,11 +8,6 @@ export let tags: string[];
 export let categories: string[];
 export let sortedPosts: Post[] = [];
 
-const params = new URLSearchParams(window.location.search);
-tags = params.has("tag") ? params.getAll("tag") : [];
-categories = params.has("category") ? params.getAll("category") : [];
-const uncategorized = params.get("uncategorized");
-
 interface Post {
 	id: string;
 	url?: string; // 预计算的文章 URL
@@ -31,9 +26,12 @@ interface Group {
 	posts: Post[];
 }
 
-let groups: Group[] = [];
+function asDate(value: Date | string) {
+	return value instanceof Date ? value : new Date(value);
+}
 
-function formatDate(date: Date) {
+function formatDate(value: Date | string) {
+	const date = asDate(value);
 	const month = (date.getMonth() + 1).toString().padStart(2, "0");
 	const day = date.getDate().toString().padStart(2, "0");
 	return `${month}-${day}`;
@@ -43,35 +41,18 @@ function formatTag(tagList: string[]) {
 	return tagList.map((t) => `#${t}`).join(" ");
 }
 
-onMount(async () => {
-	let filteredPosts: Post[] = sortedPosts;
-
-	if (tags.length > 0) {
-		filteredPosts = filteredPosts.filter(
-			(post) =>
-				Array.isArray(post.data.tags) &&
-				post.data.tags.some((tag) => tags.includes(tag)),
-		);
-	}
-
-	if (categories.length > 0) {
-		filteredPosts = filteredPosts.filter(
-			(post) => post.data.category && categories.includes(post.data.category),
-		);
-	}
-
-	if (uncategorized) {
-		filteredPosts = filteredPosts.filter((post) => !post.data.category);
-	}
-
-	// 按发布时间倒序排序，确保不受置顶影响
-	filteredPosts = filteredPosts
+function buildGroups(posts: Post[]): Group[] {
+	const sorted = posts
 		.slice()
-		.sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
+		.sort(
+			(a, b) =>
+				asDate(b.data.published).getTime() -
+				asDate(a.data.published).getTime(),
+		);
 
-	const grouped = filteredPosts.reduce(
+	const grouped = sorted.reduce(
 		(acc, post) => {
-			const year = post.data.published.getFullYear();
+			const year = asDate(post.data.published).getFullYear();
 			if (!acc[year]) {
 				acc[year] = [];
 			}
@@ -81,14 +62,50 @@ onMount(async () => {
 		{} as Record<number, Post[]>,
 	);
 
-	const groupedPostsArray = Object.keys(grouped).map((yearStr) => ({
-		year: Number.parseInt(yearStr, 10),
-		posts: grouped[Number.parseInt(yearStr, 10)],
-	}));
+	return Object.keys(grouped)
+		.map((yearStr) => ({
+			year: Number.parseInt(yearStr, 10),
+			posts: grouped[Number.parseInt(yearStr, 10)],
+		}))
+		.sort((a, b) => b.year - a.year);
+}
 
-	groupedPostsArray.sort((a, b) => b.year - a.year);
+let groups: Group[] = buildGroups(sortedPosts);
 
-	groups = groupedPostsArray;
+onMount(() => {
+	// 全件リストは親から渡る。絞り込みは URL のクエリだけで行う。
+	void tags;
+	void categories;
+	const params = new URLSearchParams(window.location.search);
+	const selectedTags = params.has("tag") ? params.getAll("tag") : [];
+	const selectedCategories = params.has("category")
+		? params.getAll("category")
+		: [];
+	const uncategorized = params.get("uncategorized");
+
+	let filteredPosts: Post[] = sortedPosts;
+
+	if (selectedTags.length > 0) {
+		filteredPosts = filteredPosts.filter(
+			(post) =>
+				Array.isArray(post.data.tags) &&
+				post.data.tags.some((tag) => selectedTags.includes(tag)),
+		);
+	}
+
+	if (selectedCategories.length > 0) {
+		filteredPosts = filteredPosts.filter(
+			(post) =>
+				post.data.category &&
+				selectedCategories.includes(post.data.category),
+		);
+	}
+
+	if (uncategorized) {
+		filteredPosts = filteredPosts.filter((post) => !post.data.category);
+	}
+
+	groups = buildGroups(filteredPosts);
 });
 </script>
 
@@ -96,9 +113,9 @@ onMount(async () => {
     {#each groups as group}
         <div>
             <div class="flex flex-row w-full items-center h-15">
-                <div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">
+                <h2 class="m-0 w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">
                     {group.year}
-                </div>
+                </h2>
                 <div class="w-[15%] md:w-[10%]">
                     <div
                             class="h-3 w-3 bg-none rounded-full outline outline-(--primary) mx-auto
@@ -135,13 +152,13 @@ onMount(async () => {
                         </div>
 
                         <!-- post title -->
-                        <div
-                                class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
+                        <h3
+                                class="m-0 w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
                      group-hover:translate-x-1 transition-all group-hover:text-(--primary)
                      text-75 pr-8 whitespace-nowrap text-ellipsis overflow-hidden"
                         >
                             {post.data.title}
-                        </div>
+                        </h3>
 
                         <!-- tag list -->
                         <div

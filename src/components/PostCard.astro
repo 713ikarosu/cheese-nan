@@ -52,9 +52,10 @@ const { remarkPluginFrontmatter } = await render(entry);
 			},
 		]}
 	>
+		<h2 class="m-0 mb-3 text-3xl font-bold">
 		<a
 			href={url}
-			class="transition group w-full block font-bold mb-3 text-3xl text-90
+			class="transition group w-full block font-bold text-3xl text-90
         hover:text-(--primary) dark:hover:text-(--primary)
         active:text-(--title-active) dark:active:text-(--title-active)
         before:w-1 before:h-5 before:rounded-md before:bg-(--primary)
@@ -79,6 +80,7 @@ const { remarkPluginFrontmatter } = await render(entry);
 				name="material-symbols:chevron-right-rounded"
 			/>
 		</a>
+		</h2>
 
 		<PostMetadata
 			published={published}

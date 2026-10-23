@@ -1,6 +1,7 @@
 ---
 title: Next.js x Prisma x Neon で DB 接続してみた
 published: 2024-06-16
+description: 個人開発でNeonを使い、Next.jsとPrismaからDBにつないだときのメモ。
 tags: [Next.js, Prisma, Neon, DB]
 category: 技術
 draft: false

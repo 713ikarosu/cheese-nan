@@ -124,7 +124,7 @@ export async function GET(context: APIContext) {
 
 	return rss({
 		title: siteConfig.title,
-		description: siteConfig.subtitle || "No description",
+		description: siteConfig.description || siteConfig.subtitle,
 		site: context.site,
 		items: feed,
 		customData: `<language>${siteConfig.lang}</language>`,

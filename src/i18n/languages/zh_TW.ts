@@ -159,6 +159,7 @@ export const zh_TW: Translation = {
 	[Key.projectsSource]: "原始碼",
 	[Key.projectsVisit]: "前往專案",
 	[Key.projectsGitHub]: "GitHub",
+	[Key.projectsExample]: "範例",
 
 	// RSS 頁面
 	[Key.rss]: "RSS 訂閱",

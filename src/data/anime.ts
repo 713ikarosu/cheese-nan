@@ -1,3 +1,5 @@
+// テーマ付属のサンプルです。ページは featurePages.anime = false。
+// TODO: 自分の視聴記録に差し替えてからページを開く。
 // 本地番剧数据配置
 export type AnimeItem = {
 	title: string;

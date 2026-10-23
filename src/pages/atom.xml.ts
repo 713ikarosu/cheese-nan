@@ -34,7 +34,7 @@ export async function GET(context: APIContext) {
 	let atomFeed = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>${siteConfig.title}</title>
-  <subtitle>${siteConfig.subtitle || "No description"}</subtitle>
+  <subtitle>${siteConfig.description || siteConfig.subtitle}</subtitle>
   <link href="${context.site}" rel="alternate" type="text/html"/>
   <link href="${new URL("atom.xml", context.site)}" rel="self" type="application/atom+xml"/>
   <id>${context.site}</id>

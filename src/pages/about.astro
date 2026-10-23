@@ -14,8 +14,10 @@ if (!aboutPost) {
 
 const { Content } = await render(aboutPost);
 const title = i18n(I18nKey.about);
+const description =
+	"東京のフリーランスフロントエンドエンジニア、Hirokatsuのプロフィールです。";
 ---
-<MainGridLayout title={title}>
+<MainGridLayout title={title} description={description}>
 	<!-- 引入右侧边栏布局管理器 -->
   <script>
     import('../scripts/right-sidebar-layout.js');

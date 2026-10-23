@@ -104,10 +104,19 @@ if (title) {
 		: siteConfig.title;
 }
 
+const pageDescription =
+	(description && description.trim()) || siteConfig.description || pageTitle;
+
+const siteBase = Astro.site ?? siteConfig.siteURL;
+const canonicalUrl = new URL(Astro.url.pathname, siteBase).href;
+const rssUrl = new URL("rss.xml", siteBase).href;
+
 let ogImageUrl: string | undefined;
 if (siteConfig.generateOgImages && postSlug) {
-	ogImageUrl = new URL(`/og/${postSlug}.png`, Astro.site).toString();
+	ogImageUrl = new URL(`/og/${postSlug}.png`, siteBase).toString();
 }
+const resolvedOgImage =
+	ogImageUrl ?? new URL("/assets/desktop-banner/1.webp", siteBase).href;
 
 const favicons: Favicon[] =
 	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
@@ -169,52 +178,18 @@ if (siteConfig.font) {
 	data-overlayscrollbars-initialize
 >
 	<head>
-		<!-- 第三方分析脚本 - 延迟加载优化 -->
-		<script is:inline>
-			// 使用 requestIdleCallback 延迟加载第三方脚本
-			function loadAnalytics() {
-				// Google Tag Manager
-				(function (w, d, s, l, i) {
-					w[l] = w[l] || [];
-					w[l].push({
-						"gtm.start": new Date().getTime(),
-						event: "gtm.js",
-					});
-					var f = d.getElementsByTagName(s)[0],
-						j = d.createElement(s),
-						dl = l != "dataLayer" ? "&l=" + l : "";
-					j.async = true;
-					j.src =
-						"https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-					f.parentNode.insertBefore(j, f);
-				})(window, document, "script", "dataLayer", "GTM-KRX3XGVH");
-
-				// Clarity
-				(function (c, l, a, r, i, t, y) {
-					c[a] =
-						c[a] ||
-						function () {
-							(c[a].q = c[a].q || []).push(arguments);
-						};
-					t = l.createElement(r);
-					t.async = 1;
-					t.src = "https://www.clarity.ms/tag/" + i;
-					y = l.getElementsByTagName(r)[0];
-					y.parentNode.insertBefore(t, y);
-				})(window, document, "clarity", "script", "tjr3vkhj8i");
-			}
-
-			// 在浏览器空闲时加载，或者在 3 秒后加载
-			if ("requestIdleCallback" in window) {
-				requestIdleCallback(loadAnalytics, { timeout: 3000 });
-			} else {
-				setTimeout(loadAnalytics, 3000);
-			}
-		</script>
-
 		<title>{pageTitle}</title>
 		<meta charset="UTF-8" />
-		<meta name="description" content={description || pageTitle} />
+		<meta name="description" content={pageDescription} />
+		<link rel="canonical" href={canonicalUrl} />
+		{
+			siteConfig.googleSiteVerification && (
+				<meta
+					name="google-site-verification"
+					content={siteConfig.googleSiteVerification}
+				/>
+			)
+		}
 		{
 			siteConfig.keywords && siteConfig.keywords.length > 0 && (
 				<meta
@@ -225,10 +200,12 @@ if (siteConfig.font) {
 		}
 		<meta name="author" content={profileConfig.name} />
 		<meta property="og:site_name" content={siteConfig.title} />
-		<meta property="og:url" content={Astro.url} />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:title" content={pageTitle} />
-		<meta property="og:description" content={description || pageTitle} />
-		{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:image" content={resolvedOgImage} />
+		<meta property="og:image:alt" content={siteConfig.title} />
 		{
 			setOGTypeArticle ? (
 				<meta property="og:type" content="article" />
@@ -237,9 +214,10 @@ if (siteConfig.font) {
 			)
 		}
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:url" content={canonicalUrl} />
 		<meta name="twitter:title" content={pageTitle} />
-		<meta name="twitter:description" content={description || pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<meta name="twitter:image" content={resolvedOgImage} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		{
@@ -370,8 +348,37 @@ if (siteConfig.font) {
 		<link
 			rel="alternate"
 			type="application/rss+xml"
-			title={profileConfig.name}
-			href={`${Astro.site}rss.xml`}
+			title={`${siteConfig.title} RSS`}
+			href={rssUrl}
+		/>
+		<link
+			rel="alternate"
+			type="application/atom+xml"
+			title={`${siteConfig.title} Atom`}
+			href={new URL("atom.xml", siteBase).href}
+		/>
+		<script
+			is:inline
+			type="application/ld+json"
+			set:html={JSON.stringify({
+				"@context": "https://schema.org",
+				"@type": "WebSite",
+				name: siteConfig.title,
+				url: siteBase.toString(),
+				description: siteConfig.description,
+				inLanguage: "ja",
+				author: {
+					"@type": "Person",
+					name: profileConfig.name,
+					jobTitle: "フロントエンドエンジニア",
+					url: siteBase.toString(),
+					address: {
+						"@type": "PostalAddress",
+						addressLocality: "東京",
+						addressCountry: "JP",
+					},
+				},
+			})}
 		/>
 		
 	</head>
@@ -383,13 +390,6 @@ if (siteConfig.font) {
 		style={bodyFontFamily ? `font-family: ${bodyFontFamily};` : ""}
 		data-overlayscrollbars-initialize
 	>
-		<noscript
-			><iframe
-				src="https://www.googletagmanager.com/ns.html?id=GTM-KRX3XGVH"
-				height="0"
-				width="0"
-				style="display:none;visibility:hidden"></iframe></noscript
-		>
 		<!-- 页面顶部渐变高光效果 - 只在full和semifull模式下显示 -->
 		{shouldShowTopHighlight && <div class="top-gradient-highlight" />}
 

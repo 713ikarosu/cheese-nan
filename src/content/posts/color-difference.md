@@ -1,6 +1,7 @@
 ---
 title: 色差について
 published: 2019-04-23
+description: 色差とCIE LAB、CIE 1994、CIE 2000の計算式を調べてまとめたメモ。
 tags: [色彩, 画像処理, 数学]
 category: 技術
 draft: false

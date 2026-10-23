@@ -1,6 +1,7 @@
 ---
 title: Gitの謎エラー - Xcodeのせいかも編
 published: 2019-04-25
+description: Macでgitを打つとxcrunのエラーが出たので、Xcodeのコマンドラインツールを入れ直した記録。
 tags: [Git, Mac, Xcode, Homebrew]
 category: 技術
 draft: false

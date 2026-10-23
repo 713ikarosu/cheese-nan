@@ -1,3 +1,5 @@
+// テーマ付属のサンプル端末です。ページは featurePages.devices = false。
+// TODO: 実際に使っている機材に差し替えてからページを開く。
 // 设备数据配置文件
 
 export interface Device {

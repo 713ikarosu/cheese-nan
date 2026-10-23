@@ -16,7 +16,6 @@ import remarkDirective from "remark-directive";
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
-import { siteConfig } from "./src/config.ts";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
@@ -30,7 +29,8 @@ import { rehypeImageWidth } from "./src/plugins/rehype-image-width.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-	site: siteConfig.siteURL,
+	// カスタムドメインは使わない。Cloudflare Pages の公開URL。
+	site: "https://cheese-nan.pages.dev",
 	base: "/",
 	trailingSlash: "always",
 
@@ -114,7 +114,22 @@ export default defineConfig({
 		svelte({
 			preprocess: vitePreprocess(),
 		}),
-		sitemap(),
+		sitemap({
+			filter: (page) => {
+				// 中身がテーマのサンプルのページと 404 はサイトマップに出さない
+				const blocked = [
+					"/404",
+					"/anime/",
+					"/diary/",
+					"/friends/",
+					"/skills/",
+					"/timeline/",
+					"/albums/",
+					"/devices/",
+				];
+				return !blocked.some((path) => page.includes(path));
+			},
+		}),
 	],
 	markdown: {
 		remarkPlugins: [

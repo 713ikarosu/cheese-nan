@@ -47,6 +47,11 @@ const projectsByCategory = categories.reduce(
 
 const title = i18n(I18nKey.projects);
 const subtitle = i18n(I18nKey.projectsSubtitle);
+const onlyExamples =
+	projectsData.length > 0 && projectsData.every((project) => project.example);
+const description = onlyExamples
+	? "Hirokatsuの作品ページです。いま出ているカードは記入例で、実在の実績ではありません。"
+	: subtitle;
 
 // 获取分类文本的国际化翻译
 const getCategoryText = (category: string) => {
@@ -67,7 +72,7 @@ const getCategoryText = (category: string) => {
 };
 ---
 
-<MainGridLayout title={title} description={subtitle}>
+<MainGridLayout title={title} description={description}>
   <!-- 引入右侧边栏布局管理器 -->
   <script>
     import('../scripts/right-sidebar-layout.js');
@@ -92,7 +97,14 @@ const getCategoryText = (category: string) => {
         </p>
       </div>
 
+      {onlyExamples && (
+        <p class="mb-8 rounded-lg border border-black/10 dark:border-white/15 px-4 py-3 text-black/75 dark:text-white/75">
+          いま並んでいるカードは記入例です。実在の作品ではありません。足し方は <code>src/data/projects.ts</code> に書いてあります。
+        </p>
+      )}
+
       <!-- 统计信息 -->
+      {!onlyExamples && (
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <div class="bg-blue-500/10 dark:bg-blue-900/30 rounded-lg p-4 border border-blue-500/20 dark:border-blue-900/30 hover:shadow-lg transition-shadow duration-300">
           <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">{stats.total}</div>
@@ -111,6 +123,7 @@ const getCategoryText = (category: string) => {
           <div class="text-sm text-purple-600/70 dark:text-purple-400/70">{i18n(I18nKey.projectsTechStack)}</div>
         </div>
       </div>
+      )}
 
       <!-- 特色项目 -->
       {featuredProjects.length > 0 && (
@@ -136,6 +149,11 @@ const getCategoryText = (category: string) => {
                   <div class="flex items-start justify-between mb-3">
                     <h3 class="text-xl font-semibold text-black/90 dark:text-white/90">
                       {project.title}
+                      {project.example && (
+                        <span class="ml-2 align-middle px-2 py-0.5 text-xs rounded-full bg-black/10 text-black/70 dark:bg-white/10 dark:text-white/70">
+                          {i18n(I18nKey.projectsExample)}
+                        </span>
+                      )}
                     </h3>
                     <span class={`px-2 py-1 text-xs rounded-full ${
                       project.status === 'completed' 
@@ -225,8 +243,13 @@ const getCategoryText = (category: string) => {
                     )}
                     <div class="p-4">
                       <div class="flex items-start justify-between mb-2">
-                        <h3 class="text-lg font-semibold text-black/90 dark:text-white/90 line-clamp-1">
+                        <h3 class="text-lg font-semibold text-black/90 dark:text-white/90">
                           {project.title}
+                          {project.example && (
+                            <span class="ml-2 align-middle px-2 py-0.5 text-xs rounded-full bg-black/10 text-black/70 dark:bg-white/10 dark:text-white/70">
+                              {i18n(I18nKey.projectsExample)}
+                            </span>
+                          )}
                         </h3>
                         <span class={`px-2 py-1 text-xs rounded-full shrink-0 ml-2 ${
                           project.status === 'completed' 
@@ -289,6 +312,7 @@ const getCategoryText = (category: string) => {
       </div>
 
       <!-- 技术栈统计 -->
+      {allTechStack.length > 0 && (
       <div class="mt-12 pt-8 border-t border-black/10 dark:border-white/10">
         <h2 class="text-2xl font-bold text-black/90 dark:text-white/90 mb-4">
           {i18n(I18nKey.projectsTechStack)}
@@ -301,6 +325,7 @@ const getCategoryText = (category: string) => {
           ))}
         </div>
       </div>
+      )}
     </div>
   </div>
 </MainGridLayout>
