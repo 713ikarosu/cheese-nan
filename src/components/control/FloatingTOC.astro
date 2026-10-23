@@ -1,6 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
 import { siteConfig } from "../../config";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
 
 const tocDepth = siteConfig.toc.depth;
 const useJapaneseBadge = siteConfig.toc.useJapaneseBadge;
@@ -14,7 +16,7 @@ const useJapaneseBadge = siteConfig.toc.useJapaneseBadge;
 	<button
 		id="floating-toc-btn"
 		class="floating-toc-btn btn-card"
-		aria-label="Table of Contents"
+		aria-label={i18n(I18nKey.tableOfContents)}
 	>
 		<svg
 			class="progress-ring"

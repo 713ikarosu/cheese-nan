@@ -67,7 +67,7 @@ const yearSuffix = isChinese ? "年" : " ";
 			<button
 				id="back-to-today-btn"
 				class="p-1.5 rounded-md hover:bg-(--btn-plain-bg-hover) text-(--primary) transition-all invisible"
-				aria-label="Back to today"
+				aria-label={i18n(I18nKey.backToToday)}
 			>
 				<Icon
 					name="material-symbols:restart-alt-rounded"
@@ -77,14 +77,14 @@ const yearSuffix = isChinese ? "年" : " ";
 			<button
 				id="prev-month-btn"
 				class="p-1.5 rounded-md hover:bg-(--btn-plain-bg-hover) text-neutral-600 dark:text-neutral-400 hover:text-(--primary) transition-colors text-xl font-extrabold"
-				aria-label="Previous month"
+				aria-label={i18n(I18nKey.previousMonth)}
 			>
 				＜
 			</button>
 			<button
 				id="next-month-btn"
 				class="p-1.5 rounded-md hover:bg-(--btn-plain-bg-hover) text-neutral-600 dark:text-neutral-400 hover:text-(--primary) transition-colors text-xl font-extrabold"
-				aria-label="Next month"
+				aria-label={i18n(I18nKey.nextMonth)}
 			>
 				＞
 			</button>

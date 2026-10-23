@@ -225,7 +225,7 @@ onDestroy(() => {
             {isDesktopSearchExpanded ? 'w-48' : 'w-11'}"
         role="button"
         tabindex="0"
-        aria-label="Search"
+        aria-label={i18n(I18nKey.search)}
         onmouseenter={() => {if (!isDesktopSearchExpanded) toggleDesktopSearch()}}
         onmouseleave={collapseDesktopSearch}
         onclick={() => {
@@ -248,7 +248,7 @@ onDestroy(() => {
 </div>
 
 <!-- toggle btn for phone/tablet view -->
-<button onclick={togglePanel} aria-label="Search Panel" id="search-switch"
+<button onclick={togglePanel} aria-label={i18n(I18nKey.searchPanel)} id="search-switch"
         class="btn-plain scale-animation lg:hidden! rounded-lg w-11 h-11 active:scale-90">
     <Icon icon="material-symbols:search" class="text-[1.25rem]"></Icon>
 </button>

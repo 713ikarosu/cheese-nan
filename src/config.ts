@@ -21,6 +21,20 @@ import { LinkPreset } from "./types/config";
 // 定义站点语言
 const SITE_LANG = "ja"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
+
+// 仮のバナー。差し替えるときはこの配列と public/assets/sample/CREDITS.md を更新する。
+const sampleBanners = {
+	desktop: [
+		"/assets/sample/desktop-1.webp",
+		"/assets/sample/desktop-2.webp",
+		"/assets/sample/desktop-3.webp",
+	],
+	mobile: [
+		"/assets/sample/mobile-1.webp",
+		"/assets/sample/mobile-2.webp",
+		"/assets/sample/mobile-3.webp",
+	],
+};
 export const siteConfig: SiteConfig = {
 	title: "チーズナン",
 	subtitle: "Hirokatsuのポートフォリオとブログ",
@@ -62,7 +76,7 @@ export const siteConfig: SiteConfig = {
 		text: "チーズナン",
 		icon: "assets/home/home.png",
 		// TODO: ロゴ画像を用意したら mode を "logo" にして、このパスを差し替える
-		logo: "assets/home/default-logo.png",
+		logo: "/assets/sample/mark.png",
 	},
 
 	// 页面自动缩放配置
@@ -72,12 +86,14 @@ export const siteConfig: SiteConfig = {
 	},
 
 	bangumi: {
-		userId: "your-bangumi-id", // 在此处设置你的Bangumi用户ID，可以设置为 "sai" 测试
+		// TODO: 自分の Bangumi ID。空のあいだは取得しない。
+		userId: "",
 		fetchOnDev: false, // 是否在开发环境下获取 Bangumi 数据（默认 false），获取前先执行 pnpm build 构建 json 文件
 	},
 
 	bilibili: {
-		vmid: "your-bilibili-vmid", // 在此处设置你的Bilibili用户ID (uid)，例如 "1129280784"
+		// TODO: 自分の Bilibili uid。空のあいだは取得しない。
+		vmid: "",
 		fetchOnDev: false, // 是否在开发环境下获取 Bilibili 数据（默认 false）
 		coverMirror: "", // 封面图片镜像源（可选，如果需要使用镜像源，例如 "https://images.weserv.nl/?url="）
 		useWebp: true, // 是否使用WebP格式（默认 true）
@@ -121,32 +137,15 @@ export const siteConfig: SiteConfig = {
 	},
 
 	banner: {
-		// TODO: テーマ同梱の画像のまま。自分の写真に差し替える。
+		// 仮画像。sampleBanners と public/assets/sample/CREDITS.md を見て差し替える。
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
-		src: {
-			desktop: [
-				"/assets/desktop-banner/1.webp",
-				"/assets/desktop-banner/2.webp",
-				"/assets/desktop-banner/3.webp",
-				"/assets/desktop-banner/4.webp",
-				"/assets/desktop-banner/5.webp",
-				"/assets/desktop-banner/6.webp",
-			], // 桌面横幅图片
-			mobile: [
-				"/assets/mobile-banner/1.webp",
-				"/assets/mobile-banner/2.webp",
-				"/assets/mobile-banner/3.webp",
-				"/assets/mobile-banner/4.webp",
-				"/assets/mobile-banner/5.webp",
-				"/assets/mobile-banner/6.webp",
-			], // 移动横幅图片
-		}, // 使用本地横幅图片
+		src: sampleBanners,
 
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
 		carousel: {
 			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
-			interval: 1.5, // 轮播间隔时间（秒）
+			interval: 6, // 轮播间隔时间（秒）
 		},
 
 		waves: {
@@ -177,10 +176,9 @@ export const siteConfig: SiteConfig = {
 		},
 
 		credit: {
-			enable: false, // 显示横幅图片来源文本
-
-			text: "Describe", // 要显示的来源文本
-			url: "", // （可选）原始艺术品或艺术家页面的 URL 链接
+			enable: false, // 複数枚なのでバナー上には出さない。出典は CREDITS.md
+			text: "",
+			url: "/assets/sample/CREDITS.md",
 		},
 
 		navbar: {
@@ -196,12 +194,16 @@ export const siteConfig: SiteConfig = {
 	showCoverInContent: true, // 在文章内容页显示文章封面
 	generateOgImages: false, // 启用生成OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	favicon: [
-		// 留空以使用默认 favicon
-		// {
-		//   src: '/favicon/icon.png',    // 图标文件路径
-		//   theme: 'light',              // 可选，指定主题 'light' | 'dark'
-		//   sizes: '32x32',              // 可选，图标大小
-		// }
+		{
+			src: "/favicon/icon.png",
+			theme: "light",
+			sizes: "64x64",
+		},
+		{
+			src: "/favicon/icon.png",
+			theme: "dark",
+			sizes: "64x64",
+		},
 	],
 
 	// 字体配置
@@ -227,24 +229,7 @@ export const siteConfig: SiteConfig = {
 	showLastModified: true, // 控制“上次编辑”卡片显示的开关
 };
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
-	src: {
-		desktop: [
-			"/assets/desktop-banner/1.webp",
-			"/assets/desktop-banner/2.webp",
-			"/assets/desktop-banner/3.webp",
-			"/assets/desktop-banner/4.webp",
-			"/assets/desktop-banner/5.webp",
-			"/assets/desktop-banner/6.webp",
-		], // 桌面横幅图片
-		mobile: [
-			"/assets/mobile-banner/1.webp",
-			"/assets/mobile-banner/2.webp",
-			"/assets/mobile-banner/3.webp",
-			"/assets/mobile-banner/4.webp",
-			"/assets/mobile-banner/5.webp",
-			"/assets/mobile-banner/6.webp",
-		], // 移动横幅图片
-	}, // 使用本地横幅图片
+	src: sampleBanners,
 	position: "center", // 壁纸位置，等同于 object-position
 	carousel: {
 		enable: true, // 启用轮播
@@ -278,8 +263,8 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	// TODO: 自分の写真かアイコンに差し替える。いまの画像は仮の頭文字。
-	avatar: "assets/images/avatar.webp",
+	// TODO: 自分の写真に差し替える。いまは自作の頭文字。出典は public/assets/sample/CREDITS.md
+	avatar: "/assets/sample/avatar.webp",
 	name: "Hirokatsu",
 	bio: "東京のフリーランスフロントエンドエンジニア。2026年7月開業。",
 	typewriter: {
@@ -342,7 +327,8 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const commentConfig: CommentConfig = {
 	enable: false, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
 	twikoo: {
-		envId: "https://twikoo.vercel.app",
+		// TODO: 自分の Twikoo 環境。テーマのデモURLは外した。
+		envId: "",
 		lang: SITE_LANG,
 	},
 };
@@ -368,8 +354,9 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 	enable: false, // プレイリストが未定なので閉じている。自分のIDが決まったら true にする
 	mode: "meting", // 音乐播放器模式，可选 "local" 或 "meting"
 	meting_api:
-		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址
-	id: "14164869977", // 歌单ID
+		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // テーマ既定のAPI。使う前に自分のエンドポイントか確認する
+	// TODO: 自分のプレイリストID。空のあいだは再生しない。
+	id: "",
 	server: "netease", // 音乐源服务器。有的meting的api源支持更多平台,一般来说,netease=网易云音乐, tencent=QQ音乐, kugou=酷狗音乐, xiami=虾米音乐, baidu=百度音乐
 	type: "playlist", // 播单类型
 };
@@ -522,8 +509,8 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: false, // テーマ付属の看板娘。文言もテンプレートのままなので閉じている
-	models: ["/pio/models/pio/model.json"], // 默认模型路径
+	enable: false, // テーマ付属の Live2D は削除した。戻すときはモデルを置いてから true
+	models: [],
 	position: "left", // 模型位置
 	width: 280, // 默认宽度
 	height: 250, // 默认高度

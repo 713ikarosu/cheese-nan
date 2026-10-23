@@ -115,8 +115,10 @@ let ogImageUrl: string | undefined;
 if (siteConfig.generateOgImages && postSlug) {
 	ogImageUrl = new URL(`/og/${postSlug}.png`, siteBase).toString();
 }
+const defaultBanner = getDefaultBanner();
 const resolvedOgImage =
-	ogImageUrl ?? new URL("/assets/desktop-banner/1.webp", siteBase).href;
+	ogImageUrl ??
+	new URL(defaultBanner || "/assets/sample/desktop-1.webp", siteBase).href;
 
 const favicons: Favicon[] =
 	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
@@ -237,6 +239,7 @@ if (siteConfig.font) {
 				/>
 			))
 		}
+		<link rel="apple-touch-icon" href={url("/favicon/apple-touch-icon.png")} />
 
 		<!-- Set the theme before the page is rendered to avoid a flash -->
 		<script
@@ -657,9 +660,9 @@ function disableAnimation() {
 				banner.classList.remove("opacity-0", "scale-105");
 			}
 
-			// Handle mobile single image banner - 使用与电脑端相同的逻辑
+			// 単一画像のときだけ。カルーセルは #banner-carousel 側で初期化する。
 			const mobileBanner = document.querySelector(
-				'.block.md\\:hidden[alt="Mobile banner image of the blog"]',
+				'#banner-single-container img[data-banner="mobile"]',
 			);
 			if (mobileBanner && !document.getElementById("banner-carousel")) {
 				// 移动端使用与电脑端相同的初始化逻辑

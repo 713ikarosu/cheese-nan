@@ -1,10 +1,9 @@
 {
-	"title": "Some lovely pictures",
-	"hidden": false,
-	"description": "The world is vast, and you have to go explore it.",
+	"title": "サンプル（画像は削除）",
+	"hidden": true,
+	"description": "テーマ付属のアニメ画像は外した。自分の写真を置くまでは公開しない。",
 	"date": "2025-08-01",
-	"location": "Bilibili",
-	"tags": ["Kawai", "Cute", "Moe"],
+	"tags": [],
 	"layout": "masonry",
 	"columns": 3
 }

@@ -14,15 +14,8 @@ export interface DiaryItem {
 }
 
 // 示例日记数据
-const diaryData: DiaryItem[] = [
-	{
-		id: 1,
-		content:
-			"The falling speed of cherry blossoms is five centimeters per second!",
-		date: "2025-01-15T10:30:00Z",
-		images: ["/images/diary/sakura.jpg", "/images/diary/1.jpg"],
-	},
-];
+// テーマのサンプル日記（英語の一文とアニメ絵）は外した。
+const diaryData: DiaryItem[] = [];
 
 // 获取日记统计数据
 export const getDiaryStats = () => {
@@ -38,9 +31,9 @@ export const getDiaryStats = () => {
 		hasImages,
 		hasLocation,
 		hasMood,
-		imagePercentage: Math.round((hasImages / total) * 100),
-		locationPercentage: Math.round((hasLocation / total) * 100),
-		moodPercentage: Math.round((hasMood / total) * 100),
+		imagePercentage: total ? Math.round((hasImages / total) * 100) : 0,
+		locationPercentage: total ? Math.round((hasLocation / total) * 100) : 0,
+		moodPercentage: total ? Math.round((hasMood / total) * 100) : 0,
 	};
 };
 
