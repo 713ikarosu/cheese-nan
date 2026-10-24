@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ナンでもメモの印。文字は入れない。
+  サイトの印。文字は入れない。
   公開名は src/config.ts の SITE_TITLE（siteConfig.title）だけを変える。
-  暗い地に、閉じていない括弧と一本の記録線。
+  暗い地に、閉じていない括弧と、先が少し焦げた記録線。
 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 16 16" shape-rendering="geometricPrecision">
-  <rect x="0.5" y="0.5" width="15" height="15" rx="3" fill="#241f1c"/>
-  <path fill="#efe8df" d="M4 3h2v10H4zM4 3h5v2H4zM4 11h8v2H4z"/>
-  <rect x="8" y="6.5" width="5" height="2" fill="#c4784a"/>
+  <rect x="0.5" y="0.5" width="15" height="15" rx="3" fill="#1c1714"/>
+  <path fill="#f0e6dc" d="M4 3h2v10H4zM4 3h5v2H4zM4 11h8v2H4z"/>
+  <rect x="8" y="6.5" width="3.2" height="2" fill="#c48958"/>
+  <rect x="11.2" y="6.5" width="1.8" height="2" fill="#9a5c38"/>
 </svg>

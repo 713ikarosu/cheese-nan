@@ -20,7 +20,7 @@ import { LinkPreset } from "./types/config";
 
 // 公開名。タイトル、OGP、RSS、ナビゲーションの文字は siteConfig.title だけを表示する。
 // 名前を変えるときは、この文字列だけを書き換える。ロゴ画像には文字を焼いていない。
-const SITE_TITLE = "ナンでもメモ";
+const SITE_TITLE = "チーズナンの裏";
 
 // 定义站点语言
 const SITE_LANG = "ja"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
@@ -44,7 +44,7 @@ export const siteConfig: SiteConfig = {
 	lang: SITE_LANG,
 
 	themeColor: {
-		hue: 28, // 暗いページに、鈍い錆色を一つだけ
+		hue: 42, // 焦げ目に近い、鈍い茶色を一つだけ
 		fixed: true,
 	},
 

@@ -125,15 +125,17 @@ body:not(.enable-banner) #banner-wrapper {
 }
 
 #navbar .wordmark {
-	max-width: 7.5rem;
+	max-width: 11rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	letter-spacing: 0;
 }
 
 @media (min-width: 768px) {
 	#navbar .wordmark {
-		max-width: 16rem;
+		max-width: 18rem;
+		letter-spacing: 0.02em;
 	}
 }
 
