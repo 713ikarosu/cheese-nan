@@ -109,20 +109,20 @@ onMount(() => {
 });
 </script>
 
-<div class="card-base px-8 py-6">
+<div class="card-base px-4 py-4 md:px-8 md:py-6">
     {#each groups as group}
         <div>
-            <div class="flex flex-row w-full items-center h-15">
-                <h2 class="m-0 w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">
+            <div class="flex flex-row w-full items-center min-h-12">
+                <h2 class="m-0 w-16 shrink-0 transition text-lg md:text-xl font-bold text-right text-75">
                     {group.year}
                 </h2>
-                <div class="w-[15%] md:w-[10%]">
+                <div class="w-8 shrink-0">
                     <div
                             class="h-3 w-3 bg-none rounded-full outline outline-(--primary) mx-auto
                   -outline-offset-2 z-50 outline-3"
                     ></div>
                 </div>
-                <div class="w-[70%] md:w-[80%] transition text-left text-50">
+                <div class="min-w-0 flex-1 transition text-left text-50">
                     {group.posts.length} {i18n(group.posts.length === 1 ? I18nKey.postCount : I18nKey.postsCount)}
                 </div>
             </div>
@@ -131,18 +131,16 @@ onMount(() => {
                 <a
                         href={post.url || `/posts/${post.id}/`}
                         aria-label={post.data.title}
-                        class="group btn-plain block! h-10 w-full rounded-lg hover:text-[initial]"
+                        class="group btn-plain block! w-full rounded-lg hover:text-[initial] py-1.5"
                 >
-                    <div class="flex flex-row justify-start items-center h-full">
-                        <!-- date -->
-                        <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
+                    <div class="flex flex-row justify-start items-start">
+                        <div class="mono w-16 shrink-0 pt-0.5 transition text-xs text-right text-50">
                             {formatDate(post.data.published)}
                         </div>
 
-                        <!-- dot and line -->
-                        <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
+                        <div class="w-8 shrink-0 relative dash-line self-stretch flex items-start justify-center pt-2">
                             <div
-                                    class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
+                                    class="transition-all w-1 h-1 rounded group-hover:h-5
                        bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-(--primary)
                        outline outline-4 z-50
                        outline-(--card-bg)
@@ -151,20 +149,15 @@ onMount(() => {
                             ></div>
                         </div>
 
-                        <!-- post title -->
                         <h3
-                                class="m-0 w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
-                     group-hover:translate-x-1 transition-all group-hover:text-(--primary)
-                     text-75 pr-8 whitespace-nowrap text-ellipsis overflow-hidden"
+                                class="m-0 min-w-0 flex-1 text-left font-bold leading-snug
+                     transition-colors group-hover:text-(--primary)
+                     text-75 pr-2"
                         >
                             {post.data.title}
                         </h3>
 
-                        <!-- tag list -->
-                        <div
-                                class="hidden md:block md:w-[15%] text-left text-sm transition
-                     whitespace-nowrap text-ellipsis overflow-hidden text-30"
-                        >
+                        <div class="hidden md:block w-36 shrink-0 text-left text-sm transition text-30 pt-0.5">
                             {formatTag(post.data.tags)}
                         </div>
                     </div>
