@@ -16,6 +16,8 @@ import {
 	fullscreenWallpaperConfig,
 	siteConfig,
 } from "../config";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
 import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_EXTEND,
@@ -625,7 +627,7 @@ const transparentClass = shouldEnableTransparency
                             <!-- Mobile: use mobile-specific images -->
                             {hasMobileImage && (
                                 <ImageWrapper 
-                                    alt={`Mobile banner image ${index + 1}`} 
+                                    alt="" 
                                     class:list={["block md:hidden object-cover h-full w-full transition-transform duration-500 ease-out"]}
                                     src={Array.isArray(bannerImages.mobile) ? bannerImages.mobile[index] : (typeof bannerImages.mobile === 'string' ? bannerImages.mobile : '')} 
                                     position={siteConfig.banner.position}
@@ -635,7 +637,7 @@ const transparentClass = shouldEnableTransparency
                             <!-- Desktop/Tablet: use desktop-specific images -->
                             {hasDesktopImage && (
                                 <ImageWrapper 
-                                    alt={`Desktop banner image ${index + 1}`} 
+                                    alt="" 
                                     class:list={["hidden md:block object-cover h-full w-full transition-transform duration-500 ease-out"]}
                                     src={Array.isArray(bannerImages.desktop) ? bannerImages.desktop[index] : (typeof bannerImages.desktop === 'string' ? bannerImages.desktop : '')} 
                                     position={siteConfig.banner.position}
@@ -682,7 +684,8 @@ const transparentClass = shouldEnableTransparency
                     
                     if (mobileSrc) {
                         const mobileImg = document.createElement('img');
-                        mobileImg.alt = 'Mobile banner image of the blog';
+                        mobileImg.alt = '';
+                        mobileImg.dataset.banner = 'mobile';
                         mobileImg.className = 'block md:hidden object-cover h-full w-full transition duration-700 opacity-100';
                         mobileImg.src = mobileSrc;
                         mobileImg.loading = 'eager';
@@ -693,7 +696,8 @@ const transparentClass = shouldEnableTransparency
                     if (desktopSrc) {
                         const desktopImg = document.createElement('img');
                         desktopImg.id = 'banner';
-                        desktopImg.alt = 'Desktop banner image of the blog';
+                        desktopImg.alt = '';
+                        desktopImg.dataset.banner = 'desktop';
                         desktopImg.className = 'hidden md:block object-cover h-full w-full transition duration-700 opacity-100';
                         desktopImg.src = desktopSrc;
                         desktopImg.loading = 'eager';
@@ -706,9 +710,10 @@ const transparentClass = shouldEnableTransparency
     )}
     
     <!-- Home page text overlay -->
-    {siteConfig.banner.homeText?.enable && (
-        <div class={`banner-text-overlay absolute inset-0 z-20 flex items-center justify-center ${!showHomeText ? 'hidden' : ''}`}>
-            <div class="max-w-(--page-width) w-full px-0 md:px-4 mx-auto flex items-center justify-center h-full">
+    {showHomeText && (
+        <div class="banner-text-overlay absolute inset-0 z-20 flex items-center justify-center">
+            <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,.48), rgba(0,0,0,.28) 46%, rgba(0,0,0,.55));" aria-hidden="true"></div>
+            <div class="relative z-10 max-w-(--page-width) w-full px-0 md:px-4 mx-auto flex items-center justify-center h-full">
                 <div class="w-4/5 lg:w-3/4 text-center mb-0">
                     <div class="flex flex-col">
                         {siteConfig.banner.homeText?.title && (
@@ -804,7 +809,7 @@ const transparentClass = shouldEnableTransparency
              data-layout-mode={defaultPostListLayout}
         >
             <!-- Banner image credit -->
-            {hasBannerCredit && <a href={siteConfig.banner.credit.url} id="banner-credit" target="_blank" rel="noopener" aria-label="Visit image source"
+            {hasBannerCredit && <a href={siteConfig.banner.credit.url} id="banner-credit" target="_blank" rel="noopener noreferrer" aria-label={i18n(I18nKey.imageSource)}
                                    class:list={["group onload-animation transition-all absolute flex justify-center items-center rounded-full " +
                                    "px-3 right-4 -top-13 bg-black/60 hover:bg-black/70 h-9", {"hover:pr-9 active:bg-black/80": hasBannerLink}]}
             >

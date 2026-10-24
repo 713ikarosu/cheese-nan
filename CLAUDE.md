@@ -4,7 +4,7 @@
 
 ## プロジェクト概要
 
-**cheese-nan** は [Mizuki](https://github.com/matsuzaka-yuki/mizuki) テーマをベースにした個人ブログです。Astro + Svelte + Tailwind CSS で構築された静的サイトです。
+**cheese-nan**（公開名は「ナンでもメモ」）は [Mizuki](https://github.com/matsuzaka-yuki/mizuki) テーマをベースにした個人ブログです。Astro + Svelte + Tailwind CSS で構築された静的サイトです。リポジトリ名と公開URLは cheese-nan のままです。
 
 - サイトURL: https://cheese-nan.pages.dev/
 - 言語: 日本語 (`ja`)

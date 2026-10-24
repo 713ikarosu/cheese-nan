@@ -21,11 +21,32 @@ import { LinkPreset } from "./types/config";
 // 定义站点语言
 const SITE_LANG = "ja"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
+
+// 仮のバナー。差し替えるときはこの配列と public/assets/sample/CREDITS.md を更新する。
+const sampleBanners = {
+	desktop: [
+		"/assets/sample/desktop-1.webp",
+		"/assets/sample/desktop-2.webp",
+		"/assets/sample/desktop-3.webp",
+	],
+	mobile: [
+		"/assets/sample/mobile-1.webp",
+		"/assets/sample/mobile-2.webp",
+		"/assets/sample/mobile-3.webp",
+	],
+};
 export const siteConfig: SiteConfig = {
-	title: "cheese-nan", // TODO: サイト名を変更してください
-	subtitle: "", // TODO: サブタイトルを設定してください
-	siteURL: "https://cheese-nan.pages.dev/", // TODO: 実際のCloudflare PagesのURLに変更してください
-	siteStartDate: "2025-01-01", // 站点开始运行日期，用于站点统计组件计算运行天数
+	title: "ナンでもメモ",
+	subtitle: "hirekatsuのメモとポートフォリオ",
+	description:
+		"東京で活動しているフリーランスのフロントエンドエンジニア、hirekatsuのメモとポートフォリオです。",
+	// カスタムドメインは使わない。公開先は Cloudflare Pages のこのURL。
+	siteURL: "https://cheese-nan.pages.dev",
+	keywords: ["ナンでもメモ", "チーズナン", "hirekatsu", "フロントエンド", "フリーランス", "東京"],
+	// Search Console の「HTMLタグ」方式。content の値だけを入れる。空ならタグは出さない。
+	googleSiteVerification: "",
+	// TODO: このサイトを公開した日に合わせて変える。サイドバーの稼働日数に使う。
+	siteStartDate: "2026-10-23",
 
 	timeZone: SITE_TIMEZONE,
 
@@ -36,28 +57,26 @@ export const siteConfig: SiteConfig = {
 		fixed: false,
 	},
 
-	// 特色页面开关配置（关闭未使用的页面有助于提升 SEO，关闭后请记得在 navbarConfig 中移除对应链接）
+	// テーマ付属のページ。中身がサンプルのものは閉じている。
+	// 実在のデータを入れてから true にし、navBarConfig にもリンクを足す。
 	featurePages: {
-		anime: true, // 番剧页面开关
-		diary: true, // 日记页面开关
-		friends: true, // 友链页面开关
-		projects: true, // 项目页面开关
-		skills: true, // 技能页面开关
-		timeline: true, // 时间线页面开关
-		albums: true, // 相册页面开关
-		devices: true, // 设备页面开关
+		anime: false,
+		diary: false,
+		friends: false,
+		projects: true,
+		skills: false, // src/data/skills.ts はテーマの記入例。公開しない。
+		timeline: false, // src/data/timeline.ts は別人の経歴。公開しない。
+		albums: false,
+		devices: false,
 	},
 
 	// 顶栏标题配置
 	navbarTitle: {
-		// 显示模式："text-icon" 显示图标+文本，"logo" 仅显示Logo
-		mode: "logo",
-		// 顶栏标题文本
-		text: "MizukiUI",
-		// 顶栏标题图标路径，默认使用 public/assets/home/home.png
+		mode: "text-icon",
+		text: "ナンでもメモ",
 		icon: "assets/home/home.png",
-		// 网站Logo图片路径
-		logo: "assets/home/default-logo.png",
+		// TODO: ロゴ画像を用意したら mode を "logo" にして、このパスを差し替える
+		logo: "/assets/sample/mark.png",
 	},
 
 	// 页面自动缩放配置
@@ -67,12 +86,14 @@ export const siteConfig: SiteConfig = {
 	},
 
 	bangumi: {
-		userId: "your-bangumi-id", // 在此处设置你的Bangumi用户ID，可以设置为 "sai" 测试
+		// TODO: 自分の Bangumi ID。空のあいだは取得しない。
+		userId: "",
 		fetchOnDev: false, // 是否在开发环境下获取 Bangumi 数据（默认 false），获取前先执行 pnpm build 构建 json 文件
 	},
 
 	bilibili: {
-		vmid: "your-bilibili-vmid", // 在此处设置你的Bilibili用户ID (uid)，例如 "1129280784"
+		// TODO: 自分の Bilibili uid。空のあいだは取得しない。
+		vmid: "",
 		fetchOnDev: false, // 是否在开发环境下获取 Bilibili 数据（默认 false）
 		coverMirror: "", // 封面图片镜像源（可选，如果需要使用镜像源，例如 "https://images.weserv.nl/?url="）
 		useWebp: true, // 是否使用WebP格式（默认 true）
@@ -116,31 +137,15 @@ export const siteConfig: SiteConfig = {
 	},
 
 	banner: {
+		// 仮画像。sampleBanners と public/assets/sample/CREDITS.md を見て差し替える。
 		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
-		src: {
-			desktop: [
-				"/assets/desktop-banner/1.webp",
-				"/assets/desktop-banner/2.webp",
-				"/assets/desktop-banner/3.webp",
-				"/assets/desktop-banner/4.webp",
-				"/assets/desktop-banner/5.webp",
-				"/assets/desktop-banner/6.webp",
-			], // 桌面横幅图片
-			mobile: [
-				"/assets/mobile-banner/1.webp",
-				"/assets/mobile-banner/2.webp",
-				"/assets/mobile-banner/3.webp",
-				"/assets/mobile-banner/4.webp",
-				"/assets/mobile-banner/5.webp",
-				"/assets/mobile-banner/6.webp",
-			], // 移动横幅图片
-		}, // 使用本地横幅图片
+		src: sampleBanners,
 
 		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
 
 		carousel: {
 			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
-			interval: 1.5, // 轮播间隔时间（秒）
+			interval: 6, // 轮播间隔时间（秒）
 		},
 
 		waves: {
@@ -151,38 +156,30 @@ export const siteConfig: SiteConfig = {
 
 		// PicFlow API支持(智能图片API)
 		imageApi: {
-			enable: false, // 启用图片API
-			url: "http://domain.com/api_v2.php?format=text&count=4", // API地址，返回每行一个图片链接的文本
+			enable: false,
+			// 使うときは、自分で管理している https のエンドポイントだけを入れる。
+			url: "",
 		},
 		// 这里需要使用PicFlow API的Text返回类型,所以我们需要format=text参数
 		// 项目地址:https://github.com/matsuzaka-yuki/PicFlow-API
 		// 请自行搭建API
 
 		homeText: {
-			enable: true, // 在主页显示自定义文本
-			title: "わたしの部屋", // 主页横幅主标题
-
-			subtitle: [
-				"特別なことはないけど、君がいると十分です",
-				"今でもあなたは私の光",
-				"君ってさ、知らないうちに私の毎日になってたよ",
-				"君と話すと、なんか毎日がちょっと楽しくなるんだ",
-				"今日はなんでもない日。でも、ちょっとだけいい日",
-			],
+			enable: true,
+			title: "ナンでもメモ",
+			subtitle: ["東京で、フロントエンドをやっています。"],
 			typewriter: {
-				enable: true, // 启用副标题打字机效果
-
-				speed: 100, // 打字速度（毫秒）
-				deleteSpeed: 50, // 删除速度（毫秒）
-				pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
+				enable: false,
+				speed: 100,
+				deleteSpeed: 50,
+				pauseTime: 2000,
 			},
 		},
 
 		credit: {
-			enable: false, // 显示横幅图片来源文本
-
-			text: "Describe", // 要显示的来源文本
-			url: "", // （可选）原始艺术品或艺术家页面的 URL 链接
+			enable: false, // 複数枚なのでバナー上には出さない。出典は CREDITS.md
+			text: "",
+			url: "/assets/sample/CREDITS.md",
 		},
 
 		navbar: {
@@ -198,55 +195,41 @@ export const siteConfig: SiteConfig = {
 	showCoverInContent: true, // 在文章内容页显示文章封面
 	generateOgImages: false, // 启用生成OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	favicon: [
-		// 留空以使用默认 favicon
-		// {
-		//   src: '/favicon/icon.png',    // 图标文件路径
-		//   theme: 'light',              // 可选，指定主题 'light' | 'dark'
-		//   sizes: '32x32',              // 可选，图标大小
-		// }
+		{
+			src: "/favicon/icon.png",
+			theme: "light",
+			sizes: "64x64",
+		},
+		{
+			src: "/favicon/icon.png",
+			theme: "dark",
+			sizes: "64x64",
+		},
 	],
 
-	// 字体配置
+	// Zen Kaku Gothic New（OFL）。源ファイルは assets/font/。ビルド時にサイトで使う文字だけ woff2 にする。
+	// 開発サーバーでは woff2 がまだ無いので、ブラウザの標準フォントで表示される。
 	font: {
-		// 注意：自定义字体需要在 src/styles/main.css 中引入字体文件
-		// 注意：字体子集优化功能目前仅支持 TTF 格式字体,开启后需要在生产环境才能看到效果,在Dev环境下显示的是浏览器默认字体!
 		asciiFont: {
-			// 英文字体 - 优先级最高
-			// 指定为英文字体则无论字体包含多大范围，都只会保留 ASCII 字符子集
-			fontFamily: "ZenMaruGothic-Medium",
-			fontWeight: "400",
-			localFonts: ["ZenMaruGothic-Medium.ttf"],
-			enableCompress: true, // 启用字体子集优化，减少字体文件大小
+			fontFamily: "Zen Kaku Gothic New",
+			fontWeight: "500",
+			localFonts: [],
+			enableCompress: false,
 		},
 		cjkFont: {
-			// 中日韩字体 - 作为回退字体
-			fontFamily: "萝莉体 第二版",
+			fontFamily: "Zen Kaku Gothic New",
 			fontWeight: "500",
-			localFonts: ["萝莉体 第二版.ttf"],
-			enableCompress: true, // 启用字体子集优化，减少字体文件大小
+			localFonts: [
+				"ZenKakuGothicNew-Medium.ttf",
+				"ZenKakuGothicNew-Bold.ttf",
+			],
+			enableCompress: true,
 		},
 	},
 	showLastModified: true, // 控制“上次编辑”卡片显示的开关
 };
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
-	src: {
-		desktop: [
-			"/assets/desktop-banner/1.webp",
-			"/assets/desktop-banner/2.webp",
-			"/assets/desktop-banner/3.webp",
-			"/assets/desktop-banner/4.webp",
-			"/assets/desktop-banner/5.webp",
-			"/assets/desktop-banner/6.webp",
-		], // 桌面横幅图片
-		mobile: [
-			"/assets/mobile-banner/1.webp",
-			"/assets/mobile-banner/2.webp",
-			"/assets/mobile-banner/3.webp",
-			"/assets/mobile-banner/4.webp",
-			"/assets/mobile-banner/5.webp",
-			"/assets/mobile-banner/6.webp",
-		], // 移动横幅图片
-	}, // 使用本地横幅图片
+	src: sampleBanners,
 	position: "center", // 壁纸位置，等同于 object-position
 	carousel: {
 		enable: true, // 启用轮播
@@ -261,102 +244,31 @@ export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
 		LinkPreset.Archive,
-		// 支持自定义导航栏链接，支持多级菜单
+		LinkPreset.Projects,
+		LinkPreset.About,
 		{
-			name: "Links",
-			url: "/links/",
-			icon: "material-symbols:link",
-			children: [
-				{
-					name: "GitHub",
-					url: "https://github.com/713ikarosu",
-					external: true,
-					icon: "fa7-brands:github",
-				},
-				{
-					name: "Twitter",
-					url: "https://twitter.com/", // TODO: TwitterのURLを設定してください
-					external: true,
-					icon: "fa7-brands:x-twitter",
-				},
-			],
+			name: "GitHub",
+			url: "https://github.com/713ikarosu",
+			external: true,
+			icon: "fa7-brands:github",
 		},
-		{
-			name: "My",
-			url: "/content/",
-			icon: "material-symbols:person",
-			children: [
-				{
-					name: "Anime",
-					url: "/anime/",
-					icon: "material-symbols:movie",
-				},
-				{
-					name: "Diary",
-					url: "/diary/",
-					icon: "material-symbols:book",
-				},
-				{
-					name: "Gallery",
-					url: "/albums/",
-					icon: "material-symbols:photo-library",
-				},
-				{
-					name: "Devices",
-					url: "devices/",
-					icon: "material-symbols:devices",
-					external: false,
-				},
-			],
-		},
-		{
-			name: "About",
-			url: "/content/",
-			icon: "material-symbols:info",
-			children: [
-				{
-					name: "About",
-					url: "/about/",
-					icon: "material-symbols:person",
-				},
-				{
-					name: "Friends",
-					url: "/friends/",
-					icon: "material-symbols:group",
-				},
-			],
-		},
-		{
-			name: "Others",
-			url: "#",
-			icon: "material-symbols:more-horiz",
-			children: [
-				{
-					name: "Projects",
-					url: "/projects/",
-					icon: "material-symbols:work",
-				},
-				{
-					name: "Skills",
-					url: "/skills/",
-					icon: "material-symbols:psychology",
-				},
-				{
-					name: "Timeline",
-					url: "/timeline/",
-					icon: "material-symbols:timeline",
-				},
-			],
-		},
+		// TODO: X（Twitter）のURLが分かったら足す
+		// {
+		// 	name: "X",
+		// 	url: "https://x.com/TODO",
+		// 	external: true,
+		// 	icon: "fa7-brands:x-twitter",
+		// },
 	],
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/avatar.webp",
-	name: "cheese-nan", // TODO: 表示名を変更してください
-	bio: "", // TODO: 自己紹介文を設定してください
+	// TODO: 自分の写真に差し替える。いまは自作の頭文字。出典は public/assets/sample/CREDITS.md
+	avatar: "/assets/sample/avatar.webp",
+	name: "hirekatsu",
+	bio: "東京のフリーランスフロントエンドエンジニア。2026年7月開業。",
 	typewriter: {
-		enable: true,
+		enable: false,
 		speed: 80,
 	},
 	links: [
@@ -365,11 +277,10 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa7-brands:github",
 			url: "https://github.com/713ikarosu",
 		},
-		{
-			name: "Twitter",
-			icon: "fa7-brands:x-twitter",
-			url: "https://twitter.com/", // TODO: TwitterのURLを設定してください
-		},
+		// TODO: メールが決まったら追加する
+		// { name: "Email", icon: "material-symbols:mail", url: "mailto:TODO" },
+		// TODO: X（Twitter）のURLが決まったら追加する
+		// { name: "X", icon: "fa7-brands:x-twitter", url: "https://x.com/TODO" },
 	],
 };
 
@@ -416,7 +327,8 @@ export const expressiveCodeConfig: ExpressiveCodeConfig = {
 export const commentConfig: CommentConfig = {
 	enable: false, // 启用评论功能。当设置为 false 时，评论组件将不会显示在文章区域。
 	twikoo: {
-		envId: "https://twikoo.vercel.app",
+		// TODO: 自分の Twikoo 環境。テーマのデモURLは外した。
+		envId: "",
 		lang: SITE_LANG,
 	},
 };
@@ -426,23 +338,25 @@ export const shareConfig: ShareConfig = {
 };
 
 export const announcementConfig: AnnouncementConfig = {
-	title: "",
-	content: "", // TODO: お知らせを設定（空のままでも可）
+	title: "お知らせ",
+	content:
+		"2026年7月にフリーランスとして開業しました。仕事の記録を、ここに書いていきます。",
 	closable: true,
 	link: {
-		enable: false,
-		text: "詳しく見る",
+		enable: true,
+		text: "プロフィール",
 		url: "/about/",
 		external: false,
 	},
 };
 
 export const musicPlayerConfig: MusicPlayerConfig = {
-	enable: true, // 启用音乐播放器功能
+	enable: false, // プレイリストが未定なので閉じている。自分のIDが決まったら true にする
 	mode: "meting", // 音乐播放器模式，可选 "local" 或 "meting"
 	meting_api:
-		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // Meting API 地址
-	id: "14164869977", // 歌单ID
+		"https://meting.mysqil.com/api?server=:server&type=:type&id=:id&auth=:auth&r=:r", // テーマ既定のAPI。使う前に自分のエンドポイントか確認する
+	// TODO: 自分のプレイリストID。空のあいだは再生しない。
+	id: "",
 	server: "netease", // 音乐源服务器。有的meting的api源支持更多平台,一般来说,netease=网易云音乐, tencent=QQ音乐, kugou=酷狗音乐, xiami=虾米音乐, baidu=百度音乐
 	type: "playlist", // 播单类型
 };
@@ -595,25 +509,20 @@ export const sakuraConfig: SakuraConfig = {
 
 // Pio 看板娘配置
 export const pioConfig: import("./types/config").PioConfig = {
-	enable: true, // 启用看板娘
-	models: ["/pio/models/pio/model.json"], // 默认模型路径
+	enable: false, // テーマ付属の Live2D は削除した。戻すときはモデルを置いてから true
+	models: [],
 	position: "left", // 模型位置
 	width: 280, // 默认宽度
 	height: 250, // 默认高度
 	mode: "draggable", // 默认为可拖拽模式
 	hiddenOnMobile: true, // 默认在移动设备上隐藏
 	dialog: {
-		welcome: "Welcome to Mizuki Website!", // 欢迎词
-		touch: [
-			"What are you doing?",
-			"Stop touching me!",
-			"HENTAI!",
-			"Don't bully me like that!",
-		], // 触摸提示
-		home: "Click here to go back to homepage!", // 首页提示
-		skin: ["Want to see my new outfit?", "The new outfit looks great~"], // 换装提示
-		close: "QWQ See you next time~", // 关闭提示
-		link: "https://github.com/matsuzaka-yuki/Mizuki", // 关于链接
+		welcome: "ナンでもメモです。",
+		touch: ["そこは触らないでください。"],
+		home: "ホームに戻る",
+		skin: ["着替えはありません。", "このままです。"],
+		close: "また来てください。",
+		link: "/about/",
 	},
 };
 

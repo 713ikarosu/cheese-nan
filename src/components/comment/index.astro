@@ -15,7 +15,7 @@ const path = `/posts/${slug}`;
 // const url = `${Astro.site?.href}${path}`;
 
 let commentService = "";
-if (commentConfig?.enable && commentConfig?.twikoo) {
+if (commentConfig?.enable && commentConfig.twikoo?.envId) {
 	commentService = "twikoo";
 }
 

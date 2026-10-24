@@ -9,8 +9,14 @@ import type {
 export type SiteConfig = {
 	title: string;
 	subtitle: string;
-	siteURL: string; // 站点URL，以斜杠结尾，例如：https://mizuki.mysqil.com/
+	description: string; // サイト全体の説明。各ページで description を渡さないときの meta / OG に使う
+	siteURL: string; // 公開URL。末尾スラッシュなし。例: https://cheese-nan.pages.dev
 	keywords?: string[]; // 站点关键词，用于生成 <meta name="keywords">
+	/**
+	 * Google Search Console の HTML タグ確認。
+	 * 表示された meta の content の値だけを入れる。空ならタグは出さない。
+	 */
+	googleSiteVerification?: string;
 	siteStartDate?: string; // 站点开始日期，格式：YYYY-MM-DD，用于计算运行天数
 
 	timeZone:

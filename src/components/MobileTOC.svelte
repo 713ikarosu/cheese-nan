@@ -321,7 +321,7 @@ if (typeof window !== "undefined") {
 <!-- TOC toggle button for mobile -->
 <button
 	on:click={togglePanel}
-	aria-label="Table of Contents"
+	aria-label={i18n(I18nKey.tableOfContents)}
 	id="mobile-toc-switch"
 	class="btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90 lg:hidden! theme-switch-btn"
 >
@@ -338,7 +338,7 @@ if (typeof window !== "undefined") {
 		<h3 class="text-lg font-bold text-(--primary)">{isHomePage ? i18n(I18nKey.postList) : i18n(I18nKey.tableOfContents)}</h3>
 		<button 
 			on:click={togglePanel}
-			aria-label="Close TOC"
+			aria-label={i18n(I18nKey.closeToc)}
 			class="btn-plain rounded-lg h-8 w-8 active:scale-90 theme-switch-btn"
 		>
 			<Icon icon="material-symbols:close" class="text-[1rem]" />

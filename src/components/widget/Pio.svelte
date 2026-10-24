@@ -7,7 +7,7 @@ const pioOptions = {
 	mode: pioConfig.mode,
 	hidden: pioConfig.hiddenOnMobile,
 	content: pioConfig.dialog || {},
-	model: pioConfig.models || ["/pio/models/pio/model.json"],
+	model: pioConfig.models ?? [],
 };
 
 // 全局Pio实例引用
@@ -80,6 +80,8 @@ function loadPioAssets() {
 
 onMount(() => {
 	if (!pioConfig.enable) return;
+	// テーマ付属の Live2D は削除済み。モデルを置いてから有効にする。
+	if (!pioConfig.models || pioConfig.models.length === 0) return;
 
 	// 如果配置了手机端隐藏，且当前屏幕宽度小于 1280px (平板/手机)，则直接终止，不加载脚本
     if (pioConfig.hiddenOnMobile && window.matchMedia("(max-width: 1280px)").matches) {

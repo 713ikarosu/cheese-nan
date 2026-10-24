@@ -1,6 +1,7 @@
 ---
 title: 色の補完 - d3-interpolate
 published: 2019-05-15
+description: d3-interpolateで色を補完するときのメモ。色差までは見ていない。
 tags: [JavaScript, d3.js, データビジュアリゼーション]
 category: 技術
 draft: false

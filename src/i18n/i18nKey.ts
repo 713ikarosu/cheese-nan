@@ -155,6 +155,7 @@ enum I18nKey {
 	projectsSource = "projectsSource",
 	projectsVisit = "projectsVisit",
 	projectsGitHub = "projectsGitHub",
+	projectsExample = "projectsExample",
 
 	// Skills page
 	skills = "skills",
@@ -329,6 +330,25 @@ enum I18nKey {
 	// 布局切换按钮
 	switchToGridMode = "switchToGridMode",
 	switchToListMode = "switchToListMode",
+
+	// 操作の読み上げ。{n} と {name} は呼び出し側で置き換える
+	displaySettings = "displaySettings",
+	openMenu = "openMenu",
+	colorScheme = "colorScheme",
+	searchPanel = "searchPanel",
+	wallpaperMode = "wallpaperMode",
+	backToTop = "backToTop",
+	closeToc = "closeToc",
+	previousPage = "previousPage",
+	nextPage = "nextPage",
+	goToPage = "goToPage",
+	backToToday = "backToToday",
+	previousMonth = "previousMonth",
+	nextMonth = "nextMonth",
+	resetToDefault = "resetToDefault",
+	imageSource = "imageSource",
+	viewTaggedPosts = "viewTaggedPosts",
+	viewCategoryPosts = "viewCategoryPosts",
 }
 
 export default I18nKey;

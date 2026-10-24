@@ -57,7 +57,7 @@ const hasRightSidebars =
 	widgetManager.getComponentsByPosition("sticky", "right", "desktop").length >
 		0;
 
-const BANGUMI_USER_ID = siteConfig.bangumi?.userId || "your-user-id";
+const BANGUMI_USER_ID = siteConfig.bangumi?.userId || "";
 const BILIBILI_VMID = siteConfig.bilibili?.vmid || "";
 const ANIME_MODE = siteConfig.anime?.mode || "bangumi";
 
@@ -148,7 +148,10 @@ let showEmptyState = false;
 if (ANIME_MODE === "bilibili" && (!BILIBILI_VMID || BILIBILI_VMID === "")) {
 	showEmptyState = true;
 	emptyDescription = i18n(I18nKey.animeConfigBilibili);
-} else if (ANIME_MODE === "bangumi" && BANGUMI_USER_ID === "your-user-id") {
+} else if (
+	ANIME_MODE === "bangumi" &&
+	(!BANGUMI_USER_ID || BANGUMI_USER_ID === "your-user-id")
+) {
 	showEmptyState = true;
 	emptyDescription = i18n(I18nKey.animeConfigBangumi);
 } else if (animeList.length === 0) {
@@ -163,7 +166,7 @@ if (ANIME_MODE === "bilibili" && (!BILIBILI_VMID || BILIBILI_VMID === "")) {
 	} else if (ANIME_MODE === "local") {
 		emptyDescription = i18n(I18nKey.animeEmptyLocal);
 	} else {
-		emptyDescription = "No anime data found.";
+		emptyDescription = i18n(I18nKey.animeEmpty);
 	}
 }
 

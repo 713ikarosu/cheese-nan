@@ -1,5 +1,13 @@
-// Project data configuration file
-// Used to manage data for the project display page
+// 作品一覧。
+// カードを足すときは、下のオブジェクトをコピーして projectsData に追加する。
+// example: true のカードは画面に「記入例」と出る。本番の作品では example を外すか false にする。
+//
+// TODO: 記入例を、公開してよい実在の作品に差し替える。
+// 公開リポジトリの候補（READMEを確認してからカードにする）:
+// - https://github.com/713ikarosu/mlb-portal （MLB portal site for Japanese）
+// - https://github.com/713ikarosu/ani-doko
+// - https://github.com/713ikarosu/Brains_IT （landing page of brains_it）
+// - https://github.com/713ikarosu/cheese-nan
 
 export interface Project {
 	id: string;
@@ -15,95 +23,53 @@ export interface Project {
 	endDate?: string;
 	featured?: boolean;
 	tags?: string[];
-	visitUrl?: string; // 添加前往项目链接字段
+	visitUrl?: string;
+	/** true のあいだは画面上で記入例だと分かる */
+	example?: boolean;
 }
 
 export const projectsData: Project[] = [
 	{
-		id: "mizuki-blog",
-		title: "Mizuki Blog Theme",
+		id: "example-web",
+		title: "記入例: Webサイト",
 		description:
-			"Modern blog theme developed based on the Astro framework, supporting multilingual, dark mode, and responsive design features.",
+			"何を作ったか、誰向けかを一文で書く。このカードは見本で、実在の作品ではない。",
 		image: "",
 		category: "web",
-		techStack: ["Astro", "TypeScript", "Tailwind CSS", "Svelte"],
+		techStack: ["TypeScript", "Astro"],
 		status: "completed",
-		liveDemo: "https://blog.example.com",
-		sourceCode: "https://github.com/example/mizuki", // 更改为GitHub链接
-		visitUrl: "https://blog.example.com", // 添加前往项目链接
-		startDate: "2024-01-01",
-		endDate: "2024-06-01",
-		featured: true,
-		tags: ["Blog", "Theme", "Open Source"],
+		liveDemo: "https://example.com",
+		sourceCode: "https://github.com/example/example-web",
+		visitUrl: "https://example.com",
+		startDate: "2026-01-01",
+		endDate: "2026-03-01",
+		featured: false,
+		tags: ["記入例"],
+		example: true,
 	},
 	{
-		id: "portfolio-website",
-		title: "Personal Portfolio",
+		id: "example-in-progress",
+		title: "記入例: 制作中のもの",
 		description:
-			"Personal portfolio website showcasing project experience and technical skills.",
+			"まだ公開前でも、状態を「進行中」にして置ける。URLが無い場合はリンクを書かなくてよい。",
 		image: "",
 		category: "web",
-		techStack: ["React", "Next.js", "TypeScript", "Framer Motion"],
-		status: "completed",
-		liveDemo: "https://portfolio.example.com",
-		sourceCode: "https://github.com/example/portfolio",
-		visitUrl: "https://portfolio.example.com", // 添加前往项目链接
-		startDate: "2023-09-01",
-		endDate: "2023-12-01",
-		featured: true,
-		tags: ["Portfolio", "React", "Animation"],
-	},
-	{
-		id: "task-manager-app",
-		title: "Task Manager App",
-		description:
-			"Cross-platform task management application supporting team collaboration and project management.",
-		image: "",
-		category: "mobile",
-		techStack: ["React Native", "TypeScript", "Redux", "Firebase"],
+		techStack: ["React"],
 		status: "in-progress",
-		startDate: "2024-03-01",
-		tags: ["Mobile", "Productivity", "Team Collaboration"],
-	},
-	{
-		id: "data-visualization-tool",
-		title: "Data Visualization Tool",
-		description:
-			"Data visualization tool supporting multiple chart types and interactive analysis.",
-		image: "",
-		category: "web",
-		techStack: ["Vue.js", "D3.js", "TypeScript", "Node.js"],
-		status: "completed",
-		liveDemo: "https://dataviz.example.com",
-		visitUrl: "https://dataviz.example.com", // 添加前往项目链接
-		startDate: "2023-06-01",
-		endDate: "2023-11-01",
-		tags: ["Data Visualization", "Analytics", "Charts"],
-	},
-	{
-		id: "e-commerce-platform",
-		title: "E-commerce Platform",
-		description:
-			"Full-stack e-commerce platform including user management, product management, and order processing features.",
-		image: "",
-		category: "web",
-		techStack: ["Next.js", "Node.js", "PostgreSQL", "Stripe"],
-		status: "planned",
-		startDate: "2024-07-01",
-		tags: ["E-commerce", "Full Stack", "Payment Integration"],
+		startDate: "2026-07-01",
+		featured: false,
+		tags: ["記入例"],
+		example: true,
 	},
 ];
 
 // Get project statistics
 export const getProjectStats = () => {
-	const total = projectsData.length;
-	const completed = projectsData.filter(
-		(p) => p.status === "completed",
-	).length;
-	const inProgress = projectsData.filter(
-		(p) => p.status === "in-progress",
-	).length;
-	const planned = projectsData.filter((p) => p.status === "planned").length;
+	const listed = projectsData.filter((project) => !project.example);
+	const total = listed.length;
+	const completed = listed.filter((p) => p.status === "completed").length;
+	const inProgress = listed.filter((p) => p.status === "in-progress").length;
+	const planned = listed.filter((p) => p.status === "planned").length;
 
 	return {
 		total,
@@ -125,16 +91,18 @@ export const getProjectsByCategory = (category?: string) => {
 
 // Get featured projects
 export const getFeaturedProjects = () => {
-	return projectsData.filter((p) => p.featured);
+	return projectsData.filter((p) => p.featured && !p.example);
 };
 
 // Get all tech stacks
 export const getAllTechStack = () => {
 	const techSet = new Set<string>();
-	projectsData.forEach((project) => {
-		project.techStack.forEach((tech) => {
-			techSet.add(tech);
+	projectsData
+		.filter((project) => !project.example)
+		.forEach((project) => {
+			project.techStack.forEach((tech) => {
+				techSet.add(tech);
+			});
 		});
-	});
 	return Array.from(techSet).sort();
 };

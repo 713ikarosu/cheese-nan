@@ -18,8 +18,8 @@
 /* Migrate from v3 config */
 @theme {
   --font-sans:
-    'Roboto', 'sans-serif', ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    "Zen Kaku Gothic New", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --breakpoint-md: 768px;
   --breakpoint-lg: 1280px;
@@ -50,20 +50,36 @@
   }
 }
 
-/* 导入 ZenMaruGothic-Medium 字体 */
+/* Zen Kaku Gothic New (OFL). ライセンス: /assets/font/ZenKakuGothicNew-OFL.txt */
 @font-face {
-  font-family: "ZenMaruGothic-Medium";
-  src: url("/assets/font/ZenMaruGothic-Medium.woff2") format("woff2");
+  font-family: "Zen Kaku Gothic New";
+  src: url("/assets/font/ZenKakuGothicNew-Medium.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  src: url("/assets/font/ZenKakuGothicNew-Medium.woff2") format("woff2");
+  font-style: normal;
   font-weight: 500;
   font-display: swap;
 }
 
-/* 导入 萝莉体 第二版 字体 */
 @font-face {
-  font-family: "萝莉体 第二版";
-  src: url("/assets/font/萝莉体 第二版.woff2") format("woff2");
+  font-family: "Zen Kaku Gothic New";
+  src: url("/assets/font/ZenKakuGothicNew-Bold.woff2") format("woff2");
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Zen Kaku Gothic New";
+  src: url("/assets/font/ZenKakuGothicNew-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
   font-display: swap;
 }
 

@@ -115,7 +115,7 @@ const jsonLd = {
     postSlug={entry.id}
     headings={headings}
 >
-    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
     <script>
     import('../scripts/right-sidebar-layout.js');
     </script>
@@ -168,18 +168,18 @@ const jsonLd = {
 
             <!-- title -->
             <div class="relative onload-animation">
-                <div
+                <h1
                     data-pagefind-body
                     data-pagefind-weight="10"
                     data-pagefind-meta="title"
-                    class="transition w-full block font-bold mb-3
+                    class="transition w-full block font-bold mb-3 m-0
                     text-3xl md:text-[2.25rem]/[2.75rem]
                     text-black/90 dark:text-white/90
                     md:before:w-1 before:h-5 before:rounded-md before:bg-(--primary)
                     before:absolute before:top-3 before:-left-4.5"
                 >
                     {entry.data.title}
-                </div>
+                </h1>
             </div>
 
             <!-- metadata -->

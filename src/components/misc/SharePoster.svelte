@@ -19,7 +19,7 @@ const SCALE = 2;
 const WIDTH = 425 * SCALE;
 const PADDING = 24 * SCALE;
 const CONTENT_WIDTH = WIDTH - PADDING * 2;
-const FONT_FAMILY = "'Roboto', sans-serif";
+const FONT_FAMILY = '"Zen Kaku Gothic New", sans-serif';
 
 // State
 let showModal = false;
@@ -403,7 +403,7 @@ function portal(node: HTMLElement) {
 <button 
   class="btn-regular px-6 py-3 rounded-lg inline-flex items-center gap-2"
   on:click={generatePoster}
-  aria-label="Generate Share Poster"
+  aria-label={i18n(I18nKey.shareArticle)}
 >
   <span>{i18n(I18nKey.shareArticle)}</span>
 </button>

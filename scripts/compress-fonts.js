@@ -5,6 +5,7 @@ import Fontmin from "fontmin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const fontSourceDir = path.join(__dirname, "../assets/font");
 
 // 读取配置文件获取语言设置和字体配置
 async function getConfig() {
@@ -152,6 +153,47 @@ function extractText(content, ext) {
 	const finalText = `${frontmatterText} ${text}`.trim();
 
 	return finalText;
+}
+
+function addCjkChars(content, textSet) {
+	for (const char of content) {
+		const code = char.codePointAt(0);
+		if (
+			(code >= 0x3000 && code <= 0x303f) ||
+			(code >= 0x3040 && code <= 0x30ff) ||
+			(code >= 0x31f0 && code <= 0x31ff) ||
+			(code >= 0x3400 && code <= 0x4dbf) ||
+			(code >= 0x4e00 && code <= 0x9fff) ||
+			(code >= 0xff00 && code <= 0xffef)
+		) {
+			textSet.add(char);
+		}
+	}
+}
+
+// 画面に出る日本語（コンポーネントの地の文を含む）をサブセットに入れる
+function scanUiSources(textSet) {
+	const roots = ["components", "layouts", "pages", "i18n", "content"].map(
+		(dir) => path.join(__dirname, "../src", dir),
+	);
+	const exts = new Set([
+		".astro",
+		".svelte",
+		".ts",
+		".js",
+		".mjs",
+		".css",
+		".md",
+		".mdx",
+	]);
+
+	for (const root of roots) {
+		if (!fs.existsSync(root)) continue;
+		for (const file of readFilesRecursively(root)) {
+			if (!exts.has(path.extname(file))) continue;
+			addCjkChars(fs.readFileSync(file, "utf-8"), textSet);
+		}
+	}
 }
 
 // 获取 ASCII 字符集（用于 asciiFont）
@@ -895,6 +937,8 @@ async function collectText() {
 		});
 	}
 
+	scanUiSources(textSet);
+
 	// 添加常用标点符号和数字
 	const commonChars = "0123456789，。！？；：\"\"''（）【】《》、·—…「」『』";
 	for (const char of commonChars) {
@@ -1009,15 +1053,16 @@ async function compressFonts() {
 		// 遍历所有需要压缩的字体
 		for (const fontConfig of fonts) {
 			// 根据字体类型选择字符集
-			const text = fontConfig.type === "asciiFont" ? asciiText : cjkText;
+			const text =
+				fontConfig.type === "asciiFont" ? asciiText : `${asciiText}${cjkText}`;
 
 			for (const fontFile of fontConfig.files) {
-				const fontSrc = path.join(__dirname, "../public/assets/font", fontFile);
+				const fontSrc = path.join(fontSourceDir, fontFile);
 				const ext = path.extname(fontFile).toLowerCase();
 				const baseName = path.basename(fontFile, ext);
 
 				if (!fs.existsSync(fontSrc)) {
-					const errorMsg = `❌ Config error [${fontConfig.type}]: Font file does not exist   In config: "${fontFile}"\n   Expected path: public/assets/font/${fontFile}\n   \n   Please check:\n   1. Is the filename correct (case sensitive)?\n   2. Is the file in public/assets/font/?\n   3. Is ${fontConfig.type}.localFonts in src/config.ts correct?`;
+					const errorMsg = `❌ Config error [${fontConfig.type}]: Font file does not exist   In config: "${fontFile}"\n   Expected path: assets/font/${fontFile}\n   \n   Please check:\n   1. Is the filename correct (case sensitive)?\n   2. Is the file in assets/font/?\n   3. Is ${fontConfig.type}.localFonts in src/config.ts correct?`;
 
 					errors.push(errorMsg);
 					console.log(`\n${errorMsg}\n`);
@@ -1070,6 +1115,10 @@ async function compressFonts() {
 					const compressedFile = path.join(distFontDir, `${baseName}.woff2`);
 
 					if (fs.existsSync(compressedFile)) {
+						const subsetTtf = path.join(distFontDir, `${baseName}.ttf`);
+						if (fs.existsSync(subsetTtf)) {
+							fs.unlinkSync(subsetTtf);
+						}
 						const compressedSize = fs.statSync(compressedFile).size;
 						totalCompressedSize += compressedSize;
 						const reduction = (
@@ -1094,7 +1143,7 @@ async function compressFonts() {
 			console.log(`${errors.length} errors, please fix and retry.\n`);
 
 			// 列出实际存在的字体文件
-			const fontDir = path.join(__dirname, "../public/assets/font");
+			const fontDir = fontSourceDir;
 			if (fs.existsSync(fontDir)) {
 				const actualFiles = fs
 					.readdirSync(fontDir)

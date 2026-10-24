@@ -164,6 +164,7 @@ export const en: Translation = {
 	[Key.projectsSource]: "Source Code",
 	[Key.projectsVisit]: "Visit Project",
 	[Key.projectsGitHub]: "GitHub",
+	[Key.projectsExample]: "Example",
 
 	// RSS Page
 	[Key.rss]: "RSS Feed",
@@ -214,6 +215,23 @@ export const en: Translation = {
 	[Key.wallpaperBanner]: "Banner Mode",
 	[Key.wallpaperFullscreen]: "Fullscreen Mode",
 	[Key.wallpaperNone]: "Hide Wallpaper",
+	[Key.displaySettings]: "Display settings",
+	[Key.openMenu]: "Menu",
+	[Key.colorScheme]: "Switch light and dark mode",
+	[Key.searchPanel]: "Open search",
+	[Key.wallpaperMode]: "Switch wallpaper",
+	[Key.backToTop]: "Back to top",
+	[Key.closeToc]: "Close table of contents",
+	[Key.previousPage]: "Previous page",
+	[Key.nextPage]: "Next page",
+	[Key.goToPage]: "Page {n}",
+	[Key.backToToday]: "Back to today",
+	[Key.previousMonth]: "Previous month",
+	[Key.nextMonth]: "Next month",
+	[Key.resetToDefault]: "Reset to default",
+	[Key.imageSource]: "Image source",
+	[Key.viewTaggedPosts]: "Posts tagged {name}",
+	[Key.viewCategoryPosts]: "Posts in {name}",
 
 	// Skills Page
 	[Key.skills]: "Skills",

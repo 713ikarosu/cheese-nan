@@ -1,6 +1,7 @@
 ---
 title: AmazonRDS(MySQL)にSSHポートフォワード接続(Mac)
 published: 2019-05-07
+description: MacからAmazon RDSのMySQLへ、SSHポートフォワードでつなぐまでに試したこと。
 tags: [AWS, MySQL, SSH, インフラ]
 category: 技術
 draft: false

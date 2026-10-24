@@ -1,5 +1,7 @@
 <script lang="ts">
 import { DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from "@constants/constants";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { getStoredTheme, setTheme } from "@utils/setting-utils";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
@@ -77,7 +79,7 @@ if (typeof window !== "undefined") {
 
 <div class="relative z-50">
     <button
-        aria-label="Light/Dark Mode"
+        aria-label={i18n(I18nKey.colorScheme)}
         class="relative btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90 theme-switch-btn"
         id="scheme-switch"
         onclick={toggleScheme}

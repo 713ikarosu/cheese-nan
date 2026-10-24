@@ -6,7 +6,7 @@ import type { APIContext, ImageMetadata } from "astro";
 import MarkdownIt from "markdown-it";
 import { parse as htmlParser } from "node-html-parser";
 import sanitizeHtml from "sanitize-html";
-import { siteConfig } from "@/config";
+import { profileConfig, siteConfig } from "@/config";
 import { getSortedPosts } from "@/utils/content-utils";
 import { getPostUrl } from "@/utils/url-utils";
 import { initPostIdMap } from "@/utils/permalink-utils";
@@ -119,14 +119,18 @@ export async function GET(context: APIContext) {
 			content: sanitizeHtml(html.toString(), {
 				allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
 			}),
+			customData: `<dc:creator><![CDATA[${profileConfig.name}]]></dc:creator>`,
 		});
 	}
 
 	return rss({
 		title: siteConfig.title,
-		description: siteConfig.subtitle || "No description",
+		description: siteConfig.description || siteConfig.subtitle,
 		site: context.site,
 		items: feed,
-		customData: `<language>${siteConfig.lang}</language>`,
+		xmlns: {
+			dc: "http://purl.org/dc/elements/1.1/",
+		},
+		customData: `<language>${siteConfig.lang}</language><dc:creator>${profileConfig.name}</dc:creator>`,
 	});
 }
