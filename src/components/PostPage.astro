@@ -25,6 +25,7 @@ const initialLayoutClass = defaultLayout === "grid" ? "grid-mode" : "list-mode";
 	id="post-list-container"
 	class={`transition-all duration-500 ease-in-out rounded-(--radius-large) bg-(--card-bg) md:bg-transparent mb-4 ${initialLayoutClass}`}
 	data-default-layout={defaultLayout}
+	data-allow-switch={siteConfig.postListLayout.allowSwitch ? "true" : "false"}
 	data-both-sidebars={hasRightSidebars}
 >
 	{
@@ -47,8 +48,11 @@ const initialLayoutClass = defaultLayout === "grid" ? "grid-mode" : "list-mode";
 			);
 			if (!postListContainer) return;
 
-			// 读取偏好
-			const savedLayout = localStorage.getItem("postListLayout");
+			const allowSwitch =
+				postListContainer.getAttribute("data-allow-switch") !== "false";
+			const savedLayout = allowSwitch
+				? localStorage.getItem("postListLayout")
+				: null;
 			const defaultLayout =
 				postListContainer.getAttribute("data-default-layout") || "list";
 			const currentLayout = savedLayout || defaultLayout;
@@ -130,11 +134,14 @@ const initialLayoutClass = defaultLayout === "grid" ? "grid-mode" : "list-mode";
 		clearTimeout(resizeTimeout);
 		resizeTimeout = window.setTimeout(() => {
 			if (window.innerWidth >= 769) {
-				const savedLayout = localStorage.getItem("postListLayout");
+				const list = document.getElementById("post-list-container");
+				const allowSwitch =
+					list?.getAttribute("data-allow-switch") !== "false";
+				const savedLayout = allowSwitch
+					? localStorage.getItem("postListLayout")
+					: null;
 				const defaultLayout =
-					document
-						.getElementById("post-list-container")
-						?.getAttribute("data-default-layout") || "list";
+					list?.getAttribute("data-default-layout") || "list";
 				updatePostListLayout(savedLayout || defaultLayout);
 			}
 		}, 100);

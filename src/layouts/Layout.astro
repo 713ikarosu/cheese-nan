@@ -118,7 +118,7 @@ if (siteConfig.generateOgImages && postSlug) {
 const defaultBanner = getDefaultBanner();
 const resolvedOgImage =
 	ogImageUrl ??
-	new URL(defaultBanner || "/assets/sample/desktop-1.webp", siteBase).href;
+	new URL(defaultBanner || "/assets/sample/mark.png", siteBase).href;
 
 const favicons: Favicon[] =
 	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
@@ -251,6 +251,7 @@ if (siteConfig.font) {
 				BANNER_HEIGHT_EXTEND,
 				PAGE_WIDTH,
 				configHue,
+				hueFixed: siteConfig.themeColor.fixed,
 				pageScaling: siteConfig.pageScaling,
 			}}
 		>
@@ -280,8 +281,8 @@ if (siteConfig.font) {
 				);
 			}
 
-			// Load the hue from local storage
-			const hue = localStorage.getItem("hue") || configHue;
+			// 色相を固定しているときは、保存済みの色を使わない
+			const hue = hueFixed ? configHue : localStorage.getItem("hue") || configHue;
 			document.documentElement.style.setProperty("--hue", hue);
 
 			// calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text

@@ -20,10 +20,8 @@ const rssUrl = new URL("rss.xml", Astro.site).href;
         <!-- RSS 标题和介绍 -->
         <div class="card-base rounded-(--radius-large) p-8 mb-6">
             <div class="text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-(--primary) rounded-2xl mb-4">
-                    <Icon name="material-symbols:rss-feed" class="text-white text-3xl" />
-                </div>
-                <h1 class="text-3xl font-bold text-(--primary) mb-3">{i18n(I18nKey.rss)}</h1>
+                <p class="log-kicker">RSS</p>
+                <h1 class="text-2xl font-bold mb-3 text-black/90 dark:text-white/90">{i18n(I18nKey.rss)}</h1>
                 <p class="text-75 max-w-2xl mx-auto">
                     {i18n(I18nKey.rssSubtitle)}
                 </p>
@@ -34,8 +32,8 @@ const rssUrl = new URL("rss.xml", Astro.site).href;
         <div class="card-base rounded-(--radius-large) p-6 mb-6">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div class="flex items-center">
-                    <div class="w-12 h-12 bg-(--primary) rounded-xl flex items-center justify-center mr-4">
-                        <Icon name="material-symbols:link" class="text-white text-xl" />
+                    <div class="w-9 h-9 border border-(--line-divider) rounded-md flex items-center justify-center mr-3 shrink-0">
+                        <Icon name="material-symbols:link" class="text-(--primary) text-lg" />
                     </div>
                     <div>
                         <h2 class="text-base font-semibold text-90 mb-1">{i18n(I18nKey.rssLink)}</h2>
@@ -48,7 +46,7 @@ const rssUrl = new URL("rss.xml", Astro.site).href;
                     </code>
                     <button 
                         id="copy-rss-btn"
-                        class="px-4 py-2 bg-(--primary) text-white rounded-lg hover:opacity-80 transition-all duration-200 font-medium text-sm whitespace-nowrap"
+                        class="btn-regular px-4 py-2 rounded-md font-medium text-sm whitespace-nowrap"
                         data-url={rssUrl}
                     >
                         {i18n(I18nKey.rssCopyLink)}
@@ -119,17 +117,15 @@ const rssUrl = new URL("rss.xml", Astro.site).href;
                     try {
                         await navigator.clipboard.writeText(url);
                         const originalText = this.textContent || "Copy Link";
-                        this.textContent = "RSS link copied to clipboard!";
-                        this.style.backgroundColor = 'var(--success-color, #10b981)';
+                        this.textContent = "コピーした";
                         
                         setTimeout(() => {
                             this.textContent = originalText;
-                            this.style.backgroundColor = '';
                         }, 2000);
                     } catch (err) {
                         console.error('复制失败:', err);
                         const originalText = this.textContent || "Copy Link";
-                        this.textContent = "Copy failed, please copy the link manually";
+                        this.textContent = "コピーできなかった";
                         setTimeout(() => {
                             this.textContent = originalText;
                         }, 2000);

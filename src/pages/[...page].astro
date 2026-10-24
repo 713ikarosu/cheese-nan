@@ -9,6 +9,7 @@ import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
 import { initPostIdMap } from "../utils/permalink-utils";
+import { url } from "../utils/url-utils";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
@@ -27,6 +28,19 @@ const len = page.data.length;
 	title={page.currentPage > 1 ? `${i18n(I18nKey.archive)} ${page.currentPage}` : undefined}
 	description={siteConfig.description}
 >
+    {page.currentPage === 1 && (
+        <header class="log-masthead">
+            <div class="log-masthead-row">
+                <img class="log-seal" src={url("/assets/sample/mark.svg")} width="36" height="36" alt="" />
+                <div>
+                    <p class="log-kicker">Record / 記録</p>
+                    <h1>{siteConfig.title}</h1>
+                </div>
+            </div>
+            <p class="log-tagline">// 見なくていい。自分用。</p>
+            <p class="log-lead">都内在住。限界オタク。フロントエンド。記録は、消える前に残す。</p>
+        </header>
+    )}
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>

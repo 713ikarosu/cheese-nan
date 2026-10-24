@@ -18,31 +18,22 @@ import { LinkPreset } from "./types/config";
 
 // 移除i18n导入以避免循环依赖
 
+// 公開名。タイトル、OGP、RSS、ナビゲーションの文字は siteConfig.title だけを表示する。
+// 名前を変えるときは、この文字列だけを書き換える。ロゴ画像には文字を焼いていない。
+const SITE_TITLE = "ナンでもメモ";
+
 // 定义站点语言
 const SITE_LANG = "ja"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
 const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
 
-// 仮のバナー。差し替えるときはこの配列と public/assets/sample/CREDITS.md を更新する。
-const sampleBanners = {
-	desktop: [
-		"/assets/sample/desktop-1.webp",
-		"/assets/sample/desktop-2.webp",
-		"/assets/sample/desktop-3.webp",
-	],
-	mobile: [
-		"/assets/sample/mobile-1.webp",
-		"/assets/sample/mobile-2.webp",
-		"/assets/sample/mobile-3.webp",
-	],
-};
 export const siteConfig: SiteConfig = {
-	title: "ナンでもメモ",
-	subtitle: "hirekatsuのメモとポートフォリオ",
+	title: SITE_TITLE,
+	subtitle: "自分用の備忘録",
 	description:
-		"東京で活動しているフリーランスのフロントエンドエンジニア、hirekatsuのメモとポートフォリオです。",
+		"hirekatsuの備忘録。都内在住、限界オタク、フロントエンド。人に見せるために書いていない。",
 	// カスタムドメインは使わない。公開先は Cloudflare Pages のこのURL。
 	siteURL: "https://cheese-nan.pages.dev",
-	keywords: ["ナンでもメモ", "チーズナン", "hirekatsu", "フロントエンド", "フリーランス", "東京"],
+	keywords: [SITE_TITLE, "チーズナン", "hirekatsu", "備忘録", "フロントエンド", "東京"],
 	// Search Console の「HTMLタグ」方式。content の値だけを入れる。空ならタグは出さない。
 	googleSiteVerification: "",
 	// TODO: このサイトを公開した日に合わせて変える。サイドバーの稼働日数に使う。
@@ -53,8 +44,8 @@ export const siteConfig: SiteConfig = {
 	lang: SITE_LANG,
 
 	themeColor: {
-		hue: 220, // ブルー系テーマカラー（0-360: 赤=0, 青=220, 緑=120, 紫=280）
-		fixed: false,
+		hue: 28, // 暗いページに、鈍い錆色を一つだけ
+		fixed: true,
 	},
 
 	// テーマ付属のページ。中身がサンプルのものは閉じている。
@@ -72,17 +63,17 @@ export const siteConfig: SiteConfig = {
 
 	// 顶栏标题配置
 	navbarTitle: {
+		// 表示される文字は siteConfig.title。text は型のため同じ定数を置く。
 		mode: "text-icon",
-		text: "ナンでもメモ",
-		icon: "assets/home/home.png",
-		// TODO: ロゴ画像を用意したら mode を "logo" にして、このパスを差し替える
-		logo: "/assets/sample/mark.png",
+		text: SITE_TITLE,
+		icon: "/assets/sample/mark.svg",
+		logo: "/assets/sample/mark.svg",
 	},
 
 	// 页面自动缩放配置
 	pageScaling: {
-		enable: true, // 是否开启自动缩放
-		targetWidth: 2000, // 目标宽度，低于此宽度时开始缩放
+		enable: false,
+		targetWidth: 2000,
 	},
 
 	bangumi: {
@@ -114,8 +105,7 @@ export const siteConfig: SiteConfig = {
 		// 默认布局模式："list" 列表模式（单列布局），"grid" 网格模式（双列布局）
 		// 注意：如果侧边栏配置启用了"both"双侧边栏，则无法使用文章列表"grid"网格（双列）布局
 		defaultMode: "list",
-		// 是否允许用户切换布局
-		allowSwitch: true,
+		allowSwitch: false,
 	},
 
 	// 标签样式配置
@@ -126,32 +116,26 @@ export const siteConfig: SiteConfig = {
 
 	// 壁纸模式配置
 	wallpaperMode: {
-		// 默认壁纸模式：banner=顶部横幅，fullscreen=全屏壁纸，none=无壁纸
-		defaultMode: "banner",
-		// 整体布局方案切换按钮显示设置（默认："desktop"）
-		// "off" = 不显示
-		// "mobile" = 仅在移动端显示
-		// "desktop" = 仅在桌面端显示
-		// "both" = 在所有设备上显示
-		showModeSwitchOnMobile: "desktop",
+		// バナーも全画面壁紙も出さない。localStorage に古い値があっても none に固定する。
+		defaultMode: "none",
+		showModeSwitchOnMobile: "off",
 	},
 
 	banner: {
-		// 仮画像。sampleBanners と public/assets/sample/CREDITS.md を見て差し替える。
-		// 支持单张图片或图片数组，当数组长度 > 1 时自动启用轮播
-		src: sampleBanners,
+		// 写真バナーは使わない。空にして、CC画像をページに出さない。
+		src: "",
 
-		position: "center", // 等同于 object-position，仅支持 'top', 'center', 'bottom'。默认为 'center'
+		position: "center",
 
 		carousel: {
-			enable: true, // 为 true 时：为多张图片启用轮播。为 false 时：从数组中随机显示一张图片
-			interval: 6, // 轮播间隔时间（秒）
+			enable: false,
+			interval: 6,
 		},
 
 		waves: {
-			enable: true, // 是否启用水波纹效果（注意：此功能性能开销较大）
-			performanceMode: false, // 性能模式：减少动画复杂度(性能提升40%)
-			mobileDisable: false, // 移动端禁用
+			enable: false,
+			performanceMode: true,
+			mobileDisable: true,
 		},
 
 		// PicFlow API支持(智能图片API)
@@ -165,9 +149,9 @@ export const siteConfig: SiteConfig = {
 		// 请自行搭建API
 
 		homeText: {
-			enable: true,
-			title: "ナンでもメモ",
-			subtitle: ["東京で、フロントエンドをやっています。"],
+			enable: false,
+			title: SITE_TITLE,
+			subtitle: ["自分用の備忘録"],
 			typewriter: {
 				enable: false,
 				speed: 100,
@@ -177,13 +161,13 @@ export const siteConfig: SiteConfig = {
 		},
 
 		credit: {
-			enable: false, // 複数枚なのでバナー上には出さない。出典は CREDITS.md
+			enable: false,
 			text: "",
 			url: "/assets/sample/CREDITS.md",
 		},
 
 		navbar: {
-			transparentMode: "semifull", // 导航栏透明模式："semi" 半透明加圆角，"full" 完全透明，"semifull" 动态透明
+			transparentMode: "semi",
 		},
 	},
 	toc: {
@@ -229,7 +213,7 @@ export const siteConfig: SiteConfig = {
 	showLastModified: true, // 控制“上次编辑”卡片显示的开关
 };
 export const fullscreenWallpaperConfig: FullscreenWallpaperConfig = {
-	src: sampleBanners,
+	src: { desktop: [], mobile: [] },
 	position: "center", // 壁纸位置，等同于 object-position
 	carousel: {
 		enable: true, // 启用轮播
@@ -266,7 +250,7 @@ export const profileConfig: ProfileConfig = {
 	// TODO: 自分の写真に差し替える。いまは自作の頭文字。出典は public/assets/sample/CREDITS.md
 	avatar: "/assets/sample/avatar.webp",
 	name: "hirekatsu",
-	bio: "東京のフリーランスフロントエンドエンジニア。2026年7月開業。",
+	bio: "都内在住。限界オタク。フロントエンド。自分用の記録。",
 	typewriter: {
 		enable: false,
 		speed: 80,
@@ -338,13 +322,12 @@ export const shareConfig: ShareConfig = {
 };
 
 export const announcementConfig: AnnouncementConfig = {
-	title: "お知らせ",
-	content:
-		"2026年7月にフリーランスとして開業しました。仕事の記録を、ここに書いていきます。",
+	title: "記録",
+	content: "2026-07 開業。以降、仕事と調べものはここに残す。",
 	closable: true,
 	link: {
-		enable: true,
-		text: "プロフィール",
+		enable: false,
+		text: "",
 		url: "/about/",
 		external: false,
 	},
@@ -386,16 +369,6 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			class: "onload-animation",
 			// 动画延迟时间（毫秒），用于错开动画效果
 			animationDelay: 0,
-		},
-		{
-			// 组件类型：公告组件
-			type: "announcement",
-			// 组件位置："top" 表示固定在顶部
-			position: "top",
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 50,
 		},
 		{
 			// 组件类型：分类组件
@@ -451,9 +424,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 
 	// 侧栏组件布局配置
 	components: {
-		left: ["profile", "announcement", "categories", "tags"],
+		left: ["profile", "categories", "tags"],
 		right: ["site-stats", "calendar"],
-		drawer: ["profile", "announcement", "categories", "tags"],
+		drawer: ["profile", "categories", "tags"],
 	},
 
 	// 默认动画配置
@@ -517,7 +490,7 @@ export const pioConfig: import("./types/config").PioConfig = {
 	mode: "draggable", // 默认为可拖拽模式
 	hiddenOnMobile: true, // 默认在移动设备上隐藏
 	dialog: {
-		welcome: "ナンでもメモです。",
+		welcome: `${SITE_TITLE}です。`,
 		touch: ["そこは触らないでください。"],
 		home: "ホームに戻る",
 		skin: ["着替えはありません。", "このままです。"],

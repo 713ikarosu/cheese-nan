@@ -8,7 +8,7 @@ import { siteConfig } from "@/config";
 import type { LIGHT_DARK_MODE, WALLPAPER_MODE } from "@/types/config";
 
 export function getDefaultHue(): number {
-	const fallback = "250";
+	const fallback = String(siteConfig.themeColor.hue);
 	const configCarrier = document.getElementById("config-carrier");
 	// 在Swup页面切换时，config-carrier可能不存在，使用默认值
 	if (!configCarrier) {
@@ -18,6 +18,9 @@ export function getDefaultHue(): number {
 }
 
 export function getHue(): number {
+	if (siteConfig.themeColor.fixed) {
+		return getDefaultHue();
+	}
 	const stored = localStorage.getItem("hue");
 	return stored ? Number.parseInt(stored) : getDefaultHue();
 }

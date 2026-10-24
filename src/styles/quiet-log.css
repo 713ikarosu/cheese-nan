@@ -1,0 +1,171 @@
+/* 地味な記録用。カードを平らにして、日付と見出しの端だけ等幅にする。 */
+
+.mono,
+.log-kicker,
+.log-tagline {
+	font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo,
+		Monaco, Consolas, "Zen Kaku Gothic New", sans-serif;
+}
+
+:root.dark {
+	color-scheme: dark;
+}
+
+.log-masthead {
+	margin: 0.15rem 0.15rem 1.1rem;
+	padding: 0.1rem 0.15rem 0.85rem;
+	border-bottom: 1px solid color-mix(in oklab, white 10%, transparent);
+}
+
+:root:not(.dark) .log-masthead {
+	border-bottom-color: color-mix(in oklab, black 10%, transparent);
+}
+
+.log-kicker {
+	margin: 0 0 0.4rem;
+	font-size: 0.72rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--primary);
+}
+
+.log-masthead-row {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 0.55rem;
+}
+
+.log-seal {
+	width: 36px;
+	height: 36px;
+	flex: none;
+	display: block;
+}
+
+.log-masthead h1 {
+	margin: 0;
+	font-size: 1.55rem;
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: 0.01em;
+}
+
+.log-masthead .log-kicker {
+	margin-bottom: 0.15rem;
+}
+
+.log-tagline {
+	margin: 0 0 0.4rem;
+	font-size: 0.8rem;
+	line-height: 1.5;
+	color: var(--content-meta);
+}
+
+.log-lead {
+	margin: 0;
+	max-width: 38rem;
+	font-size: 0.95rem;
+	line-height: 1.75;
+}
+
+#navbar > div {
+	height: 3.4rem;
+}
+
+#post-list-container .card-base {
+	border: 1px solid color-mix(in oklab, white 8%, transparent);
+	background: transparent;
+	box-shadow: none;
+}
+
+:root:not(.dark) #post-list-container .card-base {
+	border-color: color-mix(in oklab, black 8%, transparent);
+}
+
+#post-list-container .card-base > a {
+	display: none !important;
+}
+
+#post-list-container .post-chevron {
+	display: none;
+}
+
+#post-list-container .card-base > div {
+	width: 100% !important;
+	padding: 0.85rem 1rem 0.8rem !important;
+}
+
+#post-list-container h2,
+#post-list-container h2 a {
+	font-size: 1.15rem;
+	line-height: 1.45;
+}
+
+#post-list-container h2 {
+	margin-bottom: 0.35rem;
+}
+
+#post-list-container.list-mode {
+	display: flex;
+	flex-direction: column;
+	gap: 0.45rem;
+}
+
+.card-base h1.text-4xl {
+	font-size: 1.6rem;
+	line-height: 1.3;
+}
+
+body:not(.enable-banner) #banner-wrapper {
+	display: none !important;
+	height: 0 !important;
+	min-height: 0 !important;
+	pointer-events: none !important;
+}
+
+#navbar .wordmark {
+	max-width: 7.5rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+	#navbar .wordmark {
+		max-width: 16rem;
+	}
+}
+
+.post-title,
+.custom-md,
+.log-lead,
+.log-masthead h1 {
+	overflow-wrap: break-word;
+	word-break: normal;
+	line-break: strict;
+}
+
+.custom-md {
+	min-width: 0;
+	max-width: 100%;
+}
+
+.custom-md .table-wrapper,
+.custom-md .expressive-code,
+.custom-md pre,
+.custom-md .katex-display,
+.custom-md img {
+	max-width: 100%;
+}
+
+.custom-md th,
+.custom-md td {
+	white-space: normal;
+	vertical-align: top;
+}
+
+#swup-container,
+#main-grid {
+	min-width: 0;
+}
