@@ -37,12 +37,12 @@ const sampleBanners = {
 };
 export const siteConfig: SiteConfig = {
 	title: "ナンでもメモ",
-	subtitle: "Hirokatsuのメモとポートフォリオ",
+	subtitle: "hirekatsuのメモとポートフォリオ",
 	description:
-		"東京で活動しているフリーランスのフロントエンドエンジニア、Hirokatsuのメモとポートフォリオです。",
+		"東京で活動しているフリーランスのフロントエンドエンジニア、hirekatsuのメモとポートフォリオです。",
 	// カスタムドメインは使わない。公開先は Cloudflare Pages のこのURL。
 	siteURL: "https://cheese-nan.pages.dev",
-	keywords: ["ナンでもメモ", "チーズナン", "Hirokatsu", "フロントエンド", "フリーランス", "東京"],
+	keywords: ["ナンでもメモ", "チーズナン", "hirekatsu", "フロントエンド", "フリーランス", "東京"],
 	// Search Console の「HTMLタグ」方式。content の値だけを入れる。空ならタグは出さない。
 	googleSiteVerification: "",
 	// TODO: このサイトを公開した日に合わせて変える。サイドバーの稼働日数に使う。
@@ -156,8 +156,9 @@ export const siteConfig: SiteConfig = {
 
 		// PicFlow API支持(智能图片API)
 		imageApi: {
-			enable: false, // 启用图片API
-			url: "http://domain.com/api_v2.php?format=text&count=4", // API地址，返回每行一个图片链接的文本
+			enable: false,
+			// 使うときは、自分で管理している https のエンドポイントだけを入れる。
+			url: "",
 		},
 		// 这里需要使用PicFlow API的Text返回类型,所以我们需要format=text参数
 		// 项目地址:https://github.com/matsuzaka-yuki/PicFlow-API
@@ -206,24 +207,23 @@ export const siteConfig: SiteConfig = {
 		},
 	],
 
-	// 字体配置
+	// Zen Kaku Gothic New（OFL）。源ファイルは assets/font/。ビルド時にサイトで使う文字だけ woff2 にする。
+	// 開発サーバーでは woff2 がまだ無いので、ブラウザの標準フォントで表示される。
 	font: {
-		// 注意：自定义字体需要在 src/styles/main.css 中引入字体文件
-		// 注意：字体子集优化功能目前仅支持 TTF 格式字体,开启后需要在生产环境才能看到效果,在Dev环境下显示的是浏览器默认字体!
 		asciiFont: {
-			// 英文字体 - 优先级最高
-			// 指定为英文字体则无论字体包含多大范围，都只会保留 ASCII 字符子集
-			fontFamily: "ZenMaruGothic-Medium",
-			fontWeight: "400",
-			localFonts: ["ZenMaruGothic-Medium.ttf"],
-			enableCompress: true, // 启用字体子集优化，减少字体文件大小
+			fontFamily: "Zen Kaku Gothic New",
+			fontWeight: "500",
+			localFonts: [],
+			enableCompress: false,
 		},
 		cjkFont: {
-			// 中日韩字体 - 作为回退字体
-			fontFamily: "萝莉体 第二版",
+			fontFamily: "Zen Kaku Gothic New",
 			fontWeight: "500",
-			localFonts: ["萝莉体 第二版.ttf"],
-			enableCompress: true, // 启用字体子集优化，减少字体文件大小
+			localFonts: [
+				"ZenKakuGothicNew-Medium.ttf",
+				"ZenKakuGothicNew-Bold.ttf",
+			],
+			enableCompress: true,
 		},
 	},
 	showLastModified: true, // 控制“上次编辑”卡片显示的开关
@@ -265,7 +265,7 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	// TODO: 自分の写真に差し替える。いまは自作の頭文字。出典は public/assets/sample/CREDITS.md
 	avatar: "/assets/sample/avatar.webp",
-	name: "Hirokatsu",
+	name: "hirekatsu",
 	bio: "東京のフリーランスフロントエンドエンジニア。2026年7月開業。",
 	typewriter: {
 		enable: false,

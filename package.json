@@ -46,15 +46,15 @@
 		"@tailwindcss/cli": "^4.2.0",
 		"@tailwindcss/typography": "^0.5.19",
 		"@tailwindcss/vite": "^4.2.0",
-		"astro": "5.17.1",
+		"astro": "5.18.2",
 		"astro-expressive-code": "^0.41.6",
 		"astro-icon": "^1.1.5",
-		"axios": "^1.13.4",
+		"axios": "^1.20.0",
 		"crypto-js": "^4.2.0",
 		"dayjs": "^1.11.19",
 		"hastscript": "^9.0.1",
 		"katex": "^0.16.28",
-		"markdown-it": "^14.1.0",
+		"markdown-it": "^14.3.3",
 		"marked": "^16.4.2",
 		"node-html-parser": "^7.0.2",
 		"oddmisc": "^1.1.4",
@@ -72,11 +72,11 @@
 		"remark-github-admonitions-to-directives": "^1.0.5",
 		"remark-math": "^6.0.0",
 		"remark-sectionize": "^2.1.0",
-		"sanitize-html": "^2.17.0",
+		"sanitize-html": "^2.18.1",
 		"satori": "^0.19.1",
-		"sharp": "^0.34.5",
+		"sharp": "^0.35.5",
 		"stylus": "^0.64.0",
-		"svelte": "^5.46.1",
+		"svelte": "^5.53.5",
 		"tailwindcss": "^4.2.0",
 		"typescript": "^5.9.3",
 		"unist-util-visit": "^5.0.0"
@@ -98,7 +98,10 @@
 	"packageManager": "pnpm@10.22.0",
 	"pnpm": {
 		"overrides": {
-			"@emmetio/css-parser": "https://codeload.github.com/ramya-rao-a/css-parser/tar.gz/370c480ac103bd17c7bcfb34bf5d577dc40d3660"
+			"@emmetio/css-parser": "https://codeload.github.com/ramya-rao-a/css-parser/tar.gz/370c480ac103bd17c7bcfb34bf5d577dc40d3660",
+			"@astrojs/rss>fast-xml-parser": "5.11.2",
+			"is-svg>fast-xml-parser": "4.5.7",
+			"sharp": "0.35.5"
 		}
 	}
 }

@@ -19,7 +19,7 @@ const SCALE = 2;
 const WIDTH = 425 * SCALE;
 const PADDING = 24 * SCALE;
 const CONTENT_WIDTH = WIDTH - PADDING * 2;
-const FONT_FAMILY = "'Roboto', sans-serif";
+const FONT_FAMILY = '"Zen Kaku Gothic New", sans-serif';
 
 // State
 let showModal = false;

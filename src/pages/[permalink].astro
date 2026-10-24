@@ -115,7 +115,7 @@ const jsonLd = {
     postSlug={entry.id}
     headings={headings}
 >
-    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")} />
     <script>
     import('../scripts/right-sidebar-layout.js');
     </script>
