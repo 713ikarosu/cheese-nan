@@ -171,3 +171,45 @@ body:not(.enable-banner) #banner-wrapper {
 #main-grid {
 	min-width: 0;
 }
+
+/* モバイルメニュー。ライトでもダークでも文字・アイコン・ホバーが読めるようにする。 */
+#nav-menu-panel {
+	background-color: var(--float-panel-bg);
+	color: #241f1c;
+	border: 1px solid color-mix(in srgb, #241f1c 14%, transparent);
+}
+
+:root.dark #nav-menu-panel {
+	color: #f6f3f0;
+	border-color: color-mix(in srgb, #f6f3f0 16%, transparent);
+}
+
+#nav-menu-panel a,
+#nav-menu-panel button {
+	color: inherit;
+}
+
+#nav-menu-panel a > div,
+#nav-menu-panel button > div,
+#nav-menu-panel a svg,
+#nav-menu-panel button svg {
+	color: inherit;
+}
+
+#nav-menu-panel a:hover,
+#nav-menu-panel button:hover {
+	background-color: var(--btn-plain-bg-hover);
+	color: var(--primary);
+}
+
+#nav-menu-panel a:hover > div,
+#nav-menu-panel button:hover > div,
+#nav-menu-panel a:hover svg,
+#nav-menu-panel button:hover svg {
+	color: var(--primary);
+}
+
+#nav-menu-panel a:active,
+#nav-menu-panel button:active {
+	background-color: var(--btn-plain-bg-active);
+}

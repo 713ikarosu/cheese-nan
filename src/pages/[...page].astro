@@ -33,12 +33,12 @@ const len = page.data.length;
             <div class="log-masthead-row">
                 <img class="log-seal" src={url("/assets/sample/mark.svg")} width="36" height="36" alt="" />
                 <div>
-                    <p class="log-kicker">Record / 記録</p>
+                    <p class="log-kicker">メモ</p>
                     <h1>{siteConfig.title}</h1>
                 </div>
             </div>
-            <p class="log-tagline">// 焦げ目だけ、残す。</p>
-            <p class="log-lead">都内在住。限界オタク。フロントエンド。記録は、消える前に残す。</p>
+            <p class="log-tagline">{siteConfig.subtitle}</p>
+            <p class="log-lead">都内在住限界オタクフロントエンドエンジニアです。自分用のメモを書いています。</p>
         </header>
     )}
     <PostPage page={page}></PostPage>
