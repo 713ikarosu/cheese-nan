@@ -13,12 +13,11 @@ import { i18n } from "../../i18n/translation";
        class="flex items-center gap-3 text-left">
         <ImageWrapper src={profileConfig.avatar || ""} alt="" class="w-11 h-11 shrink-0 rounded-(--radius-large) object-cover"></ImageWrapper>
         <div class="min-w-0">
-            <div class="mono text-[0.68rem] tracking-[0.14em] text-(--primary) mb-0.5">// LOG</div>
-            <div class="font-bold text-base leading-tight dark:text-neutral-50 transition">{profileConfig.name}</div>
+            <div class="font-bold text-base leading-tight text-black/90 dark:text-neutral-50 transition">{profileConfig.name}</div>
         </div>
     </a>
     <div class="px-0.5">
-        <div class="text-left text-sm leading-relaxed text-neutral-400 mt-2.5 mb-2.5 transition">
+        <div class="text-left text-sm leading-relaxed text-black/70 dark:text-white/70 mt-2.5 mb-2.5 transition">
             {profileConfig.typewriter?.enable ? (
                 <TypewriterText 
                     text={profileConfig.bio || ""}

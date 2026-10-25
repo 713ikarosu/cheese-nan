@@ -110,14 +110,14 @@ const atomUrl = new URL("atom.xml", Astro.site).href;
                     if (url) {
                         navigator.clipboard.writeText(url).then(() => {
                             const originalText = this.textContent || "Copy Link";
-                            this.textContent = "コピーした";
+                            this.textContent = "コピーしました";
                             setTimeout(() => {
                                 this.textContent = originalText;
                             }, 2000);
                         }).catch(err => {
                             console.error('复制失败:', err);
                             const originalText = this.textContent || "Copy Link";
-                            this.textContent = "コピーできなかった";
+                            this.textContent = "コピーできませんでした";
                             setTimeout(() => {
                                 this.textContent = originalText;
                             }, 2000);

@@ -50,7 +50,7 @@ const subtitle = i18n(I18nKey.projectsSubtitle);
 const onlyExamples =
 	projectsData.length > 0 && projectsData.every((project) => project.example);
 const description = onlyExamples
-	? "作ったものの控え。いま出ているカードは記入例で、実在の実績ではありません。"
+	? "作ったものをまとめたページです。いま出ているカードは記入例で、実在の実績ではありません。"
 	: subtitle;
 
 // 获取分类文本的国际化翻译
@@ -99,7 +99,7 @@ const getCategoryText = (category: string) => {
 
       {onlyExamples && (
         <p class="mb-8 rounded-lg border border-black/10 dark:border-white/15 px-4 py-3 text-black/75 dark:text-white/75">
-          記入例だけ置いてある。実在の実績ではない。足し方は <code>src/data/projects.ts</code>。
+          いま並んでいるカードは記入例です。実在の作品ではありません。足し方は <code>src/data/projects.ts</code> に書いてあります。
         </p>
       )}
 

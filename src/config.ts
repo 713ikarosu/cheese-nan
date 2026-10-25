@@ -28,9 +28,9 @@ const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UT
 
 export const siteConfig: SiteConfig = {
 	title: SITE_TITLE,
-	subtitle: "自分用の備忘録",
+	subtitle: "タフな日々",
 	description:
-		"hirekatsuの備忘録。都内在住、限界オタク、フロントエンド。人に見せるために書いていない。",
+		"都内在住限界オタクフロントエンドエンジニア hirekatsu の個人メモブログです。",
 	// カスタムドメインは使わない。公開先は Cloudflare Pages のこのURL。
 	siteURL: "https://cheese-nan.pages.dev",
 	keywords: [SITE_TITLE, "チーズナン", "hirekatsu", "備忘録", "フロントエンド", "東京"],
@@ -151,7 +151,7 @@ export const siteConfig: SiteConfig = {
 		homeText: {
 			enable: false,
 			title: SITE_TITLE,
-			subtitle: ["自分用の備忘録"],
+			subtitle: ["タフな日々"],
 			typewriter: {
 				enable: false,
 				speed: 100,
@@ -250,7 +250,7 @@ export const profileConfig: ProfileConfig = {
 	// TODO: 自分の写真に差し替える。いまは自作の頭文字。出典は public/assets/sample/CREDITS.md
 	avatar: "/assets/sample/avatar.webp",
 	name: "hirekatsu",
-	bio: "都内在住。限界オタク。フロントエンド。自分用の記録。",
+	bio: "都内在住限界オタクフロントエンドエンジニアです。",
 	typewriter: {
 		enable: false,
 		speed: 80,
@@ -322,8 +322,8 @@ export const shareConfig: ShareConfig = {
 };
 
 export const announcementConfig: AnnouncementConfig = {
-	title: "記録",
-	content: "2026-07 開業。以降、仕事と調べものはここに残す。",
+	title: "お知らせ",
+	content: "2026年7月に開業しました。仕事と調べたことをここに書いています。",
 	closable: true,
 	link: {
 		enable: false,

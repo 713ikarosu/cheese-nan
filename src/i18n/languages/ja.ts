@@ -3,7 +3,7 @@ import type { Translation } from "../translation";
 
 export const ja: Translation = {
 	[Key.home]: "ホーム",
-	[Key.about]: "について",
+	[Key.about]: "プロフィール",
 	[Key.archive]: "記事",
 	[Key.search]: "検索",
 	[Key.other]: "その他",
@@ -94,8 +94,8 @@ export const ja: Translation = {
 
 	// 404ページ
 	[Key.notFound]: "404",
-	[Key.notFoundTitle]: "ページがない",
-	[Key.notFoundDescription]: "そのアドレスには、何も置いていない。",
+	[Key.notFoundTitle]: "ページが見つかりません",
+	[Key.notFoundDescription]: "このアドレスのページはありません。",
 	[Key.backToHome]: "ホームに戻る",
 
 	// 音楽プレーヤー
@@ -140,7 +140,7 @@ export const ja: Translation = {
 
 	// プロジェクトページ
 	[Key.projects]: "作ったもの",
-	[Key.projectsSubtitle]: "作ったものの控え。実在の実績は、まだ書いていない。",
+	[Key.projectsSubtitle]: "作ったものをまとめています。実在の実績はまだ書いていません。",
 	[Key.projectsAll]: "すべて",
 	[Key.projectsWeb]: "Web",
 	[Key.projectsMobile]: "モバイルアプリ",

@@ -23,7 +23,7 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))];
 const categories = [...new Set(posts.map(post => post.data.category).filter((c): c is string => typeof c === "string"))];
 ---
 
-<MainGridLayout title={i18n(I18nKey.archive)} description="書いたものの一覧。">
+<MainGridLayout title={i18n(I18nKey.archive)} description="書いた記事の一覧です。">
     <!-- 引入右侧边栏布局管理器 -->
     <script>
         import('../scripts/right-sidebar-layout.js');

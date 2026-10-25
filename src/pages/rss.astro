@@ -117,7 +117,7 @@ const rssUrl = new URL("rss.xml", Astro.site).href;
                     try {
                         await navigator.clipboard.writeText(url);
                         const originalText = this.textContent || "Copy Link";
-                        this.textContent = "コピーした";
+                        this.textContent = "コピーしました";
                         
                         setTimeout(() => {
                             this.textContent = originalText;
@@ -125,7 +125,7 @@ const rssUrl = new URL("rss.xml", Astro.site).href;
                     } catch (err) {
                         console.error('复制失败:', err);
                         const originalText = this.textContent || "Copy Link";
-                        this.textContent = "コピーできなかった";
+                        this.textContent = "コピーできませんでした";
                         setTimeout(() => {
                             this.textContent = originalText;
                         }, 2000);
