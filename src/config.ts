@@ -24,7 +24,7 @@ const SITE_TITLE = "チーズナンの裏";
 
 // 定义站点语言
 const SITE_LANG = "ja"; // 语言代码，例如：'en', 'zh_CN', 'ja' 等。
-const SITE_TIMEZONE = 8; //设置你的网站时区 from -12 to 12 default in UTC+8
+const SITE_TIMEZONE = 9; // 日本時間（UTC+9）
 
 export const siteConfig: SiteConfig = {
 	title: SITE_TITLE,

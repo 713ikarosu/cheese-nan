@@ -1,0 +1,22 @@
+{
+	"Blog post frontmatter": {
+		"scope": "markdown",
+		"prefix": "frontmatter",
+		"body": [
+			"---",
+			"title: ${1:タイトル}",
+			"published: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+			"description: \"${2}\"",
+			"image: \"\"",
+			"tags: []",
+			"category: \"\"",
+			"draft: true",
+			"pinned: false",
+			"comment: true",
+			"---",
+			"",
+			"$0"
+		],
+		"description": "ブログ記事のフロントマター。日付はエディタのローカル日付です。"
+	}
+}

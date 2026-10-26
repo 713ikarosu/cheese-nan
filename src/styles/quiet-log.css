@@ -102,6 +102,24 @@
 	line-height: 1.45;
 }
 
+/* 見出し1行目の左余白。カード全体への固定座標だと、余白を詰めたあとタイトルと日付のあいだに落ちる。 */
+.title-tick {
+	position: relative;
+}
+
+.title-tick::before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 3px;
+	border-radius: 999px;
+	background: var(--primary);
+	pointer-events: none;
+	left: -0.72rem;
+	height: 0.7lh;
+	top: 0.15lh;
+}
+
 #post-list-container h2 {
 	margin-bottom: 0.35rem;
 }

@@ -3,57 +3,69 @@
 import fs from "fs";
 import path from "path";
 
-function getDate() {
-	const today = new Date();
-	const year = today.getFullYear();
-	const month = String(today.getMonth() + 1).padStart(2, "0");
-	const day = String(today.getDate()).padStart(2, "0");
+function getTokyoDate() {
+	const parts = new Intl.DateTimeFormat("en-US", {
+		timeZone: "Asia/Tokyo",
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+	}).formatToParts(new Date());
+	const pick = (type) => parts.find((part) => part.type === type).value;
+	return `${pick("year")}-${pick("month")}-${pick("day")}`;
+}
 
-	return `${year}-${month}-${day}`;
+function yamlString(value) {
+	return JSON.stringify(value);
 }
 
 const args = process.argv.slice(2);
 
 if (args.length === 0) {
-	console.error(`Error: No filename argument provided
-Usage: npm run new-post -- <filename>`);
-	process.exit(1); // Terminate the script and return error code 1
+	console.error(`Error: No slug provided
+Usage: pnpm new-post <slug> [title]`);
+	process.exit(1);
 }
 
-let fileName = args[0];
-
-// Add .md extension if not present
-const fileExtensionRegex = /\.(md|mdx)$/i;
-if (!fileExtensionRegex.test(fileName)) {
-	fileName += ".md";
+let slug = args[0];
+if (slug.endsWith(".md") || slug.endsWith(".mdx")) {
+	slug = slug.replace(/\.(md|mdx)$/i, "");
 }
 
+if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+	console.error(
+		"Error: slug must be lowercase letters, numbers, and hyphens (example: my-post)",
+	);
+	process.exit(1);
+}
+
+const title = args.slice(1).join(" ").trim() || slug;
+const fileName = `${slug}.md`;
 const targetDir = "./src/content/posts/";
 const fullPath = path.join(targetDir, fileName);
 
 if (fs.existsSync(fullPath)) {
-	console.error(`Error: File ${fullPath} already exists `);
+	console.error(`Error: File ${fullPath} already exists`);
 	process.exit(1);
 }
 
-// recursive mode creates multi-level directories
-const dirPath = path.dirname(fullPath);
-if (!fs.existsSync(dirPath)) {
-	fs.mkdirSync(dirPath, { recursive: true });
+if (!fs.existsSync(targetDir)) {
+	fs.mkdirSync(targetDir, { recursive: true });
 }
 
 const content = `---
-title: ${args[0]}
-published: ${getDate()}
-description: ''
-image: ''
+title: ${yamlString(title)}
+published: ${getTokyoDate()}
+description: ""
+image: ""
 tags: []
-category: ''
-draft: false 
-lang: ''
+category: ""
+draft: true
+pinned: false
+comment: true
 ---
 `;
 
-fs.writeFileSync(path.join(targetDir, fileName), content);
+fs.writeFileSync(fullPath, content);
 
 console.log(`Post ${fullPath} created`);
+console.log(`Draft preview: pnpm dev → http://localhost:4321/posts/${slug}/`);
