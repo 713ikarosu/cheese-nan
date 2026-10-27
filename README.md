@@ -1,6 +1,6 @@
 # チーズナンの裏
 
-[チーズナンの裏](https://cheese-nan.pages.dev) は、Astro と Mizuki テーマで作った個人ブログで、タグラインは「タフな日々」だ。
+[チーズナンの裏](https://cheese-nan.pages.dev) は、Astro と Mizuki テーマで作った個人ブログを公開している。
 
 ## クレジット
 
@@ -22,7 +22,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-Mizuki は [Fuwari](https://github.com/saicaca/fuwari) を元にしている。Fuwari は MIT License で、著作権表示は Copyright (c) 2023 saicaca だ。MIT が求める著作権表示と許諾文は [LICENSE.MIT](LICENSE.MIT) に残してある。
+Mizuki は [Fuwari](https://github.com/saicaca/fuwari) を元にしている。Fuwari は MIT License で、著作権表示には Copyright (c) 2023 saicaca と書いてある。MIT が求める著作権表示と許諾文は [LICENSE.MIT](LICENSE.MIT) に残してある。
 
 ## セットアップ
 
@@ -33,7 +33,12 @@ pnpm install
 pnpm dev
 ```
 
-ブラウザでは http://localhost:4321 を開く。本番用にビルドするときは `pnpm build` を実行する。型チェックは `pnpm exec astro check` で行う。
+ブラウザでは http://localhost:4321 を開く。本番用のビルドと型チェックは、次のコマンドで行う。
+
+```bash
+pnpm build
+pnpm exec astro check
+```
 
 ## 記事を書く
 
@@ -43,7 +48,7 @@ pnpm dev
 pnpm new-post <slug> [title]
 ```
 
-できたファイルの `draft` は `true` なので、このままでは本番に出ない。公開するときは `draft` を `false` にする。書き方は [docs/WRITING.md](docs/WRITING.md) にまとめてある。
+できたファイルの `draft` は `true` にしてあり、このままでは本番に出ない。公開するときは `draft` を `false` にする。書き方は [docs/WRITING.md](docs/WRITING.md) に書いてある。
 
 ## デプロイ
 
