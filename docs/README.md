@@ -6,17 +6,7 @@
 
 ### 核心文档
 
-- **[../README.zh.md](../README.zh.md)** - 项目主文档 (简体中文)
-  - 快速开始
-  - 功能特性
-  - 基础配置
-  - 常见问题
-
-### 多语言文档
-
-- **[../README.md](../README.md)** - English
-- **[../README.ja.md](../README.ja.md)** - 日本語  
-- **[../README.tw.md](../README.tw.md)** - 繁體中文
+- **[../README.md](../README.md)** - 本仓库说明（日语）
 
 ### 内容分离相关
 
@@ -52,7 +42,7 @@
 ## 🚀 快速查找
 
 ### 我是新手，想快速开始
-→ 阅读 [主 README](../README.zh.md)
+→ 阅读 [README](../README.md)
 
 ### 我想部署博客
 → 阅读 [部署指南](./DEPLOYMENT.md)
@@ -92,7 +82,7 @@ docs/
 
 ### 新用户推荐阅读顺序
 
-1. [主 README](../README.zh.md) - 了解项目基本情况
+1. [README](../README.md) - 了解这个仓库
 2. [部署指南](./DEPLOYMENT.md) - 选择平台并部署
 3. (可选) [内容分离指南](./CONTENT_SEPARATION.md) - 高级功能
 
