@@ -315,7 +315,6 @@ enum I18nKey {
 	savePoster = "savePoster",
 	scanToRead = "scanToRead",
 	shareOnSocial = "shareOnSocial",
-	shareOnSocialDescription = "shareOnSocialDescription",
 
 	// 个人资料统计
 	profileStatsLoading = "profileStatsLoading",
