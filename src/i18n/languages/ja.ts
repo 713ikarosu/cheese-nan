@@ -351,8 +351,6 @@ export const ja: Translation = {
 	[Key.savePoster]: "ポスターを保存",
 	[Key.scanToRead]: "スキャンで読み込む",
 	[Key.shareOnSocial]: "共有",
-	[Key.shareOnSocialDescription]:
-		"この記事が役に立ったときは、ぜひ他の人に共有してください!",
 
 	// プロフィールの統計
 	[Key.profileStatsLoading]: "統計を読み込み中...",

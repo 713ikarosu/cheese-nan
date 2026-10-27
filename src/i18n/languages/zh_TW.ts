@@ -343,8 +343,6 @@ export const zh_TW: Translation = {
 	[Key.savePoster]: "儲存海報",
 	[Key.scanToRead]: "掃碼閱讀",
 	[Key.shareOnSocial]: "分享",
-	[Key.shareOnSocialDescription]:
-		"如果這篇文章對你有幫助，歡迎分享給更多人！",
 
 	// 個人資料統計
 	[Key.profileStatsLoading]: "統計載入中...",

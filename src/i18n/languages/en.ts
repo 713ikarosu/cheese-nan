@@ -354,8 +354,6 @@ export const en: Translation = {
 	[Key.savePoster]: "Save Poster",
 	[Key.scanToRead]: "Scan to Read",
 	[Key.shareOnSocial]: "Share",
-	[Key.shareOnSocialDescription]:
-		"If this article helped you, please share it with others!",
 
 	// Profile Stats
 	[Key.profileStatsLoading]: "Loading stats...",

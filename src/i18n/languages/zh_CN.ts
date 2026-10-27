@@ -341,8 +341,6 @@ export const zh_CN: Translation = {
 	[Key.savePoster]: "保存海报",
 	[Key.scanToRead]: "扫码阅读",
 	[Key.shareOnSocial]: "分享",
-	[Key.shareOnSocialDescription]:
-		"如果这篇文章对你有帮助，欢迎分享给更多人！",
 
 	// 个人资料
 	[Key.profileStatsLoading]: "统计加载中...",
