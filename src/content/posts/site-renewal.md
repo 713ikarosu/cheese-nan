@@ -1,11 +1,11 @@
 ---
 title: サイトを作り直した
-published: 2026-10-25
+published: 2026-10-27
 description: はてなブログのチーズナンの裏を Mizuki テーマの Astro サイトに作り直した
 image: ""
 tags: []
 category: ""
-draft: true
+draft: false
 pinned: false
 comment: true
 ---
