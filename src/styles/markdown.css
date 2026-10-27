@@ -21,8 +21,7 @@
 
   /* --- 链接 --- */
   a:not(.no-styling) {
-    @apply relative bg-none font-medium text-(--primary)
-        underline decoration-(--link-underline) decoration-1 decoration-dashed underline-offset-4;
+    @apply relative bg-none font-medium text-(--primary) underline decoration-(--link-underline) decoration-1 decoration-dashed underline-offset-4;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
 
@@ -195,6 +194,7 @@
   @apply text-inherit;
 }
 
+/* biome-ignore lint/correctness/noUnknownTypeSelector: theme uses a spoiler element */
 :root:not(.dark) .custom-md spoiler {
   --_spoiler-mask: color-mix(in oklch, var(--primary) 55%, white 45%);
 }

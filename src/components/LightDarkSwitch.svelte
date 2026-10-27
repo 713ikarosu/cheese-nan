@@ -1,18 +1,18 @@
 <script lang="ts">
-import { DARK_MODE, LIGHT_MODE, DEFAULT_THEME } from "@constants/constants";
+import { DARK_MODE, DEFAULT_THEME, LIGHT_MODE } from "@constants/constants";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { getStoredTheme, setTheme } from "@utils/setting-utils";
-import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 import { onMount } from "svelte";
+import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 
 const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE];
 let mode: LIGHT_DARK_MODE = $state(DEFAULT_THEME);
 let isChanging = false;
 
 onMount(() => {
-    mode = getStoredTheme();
+	mode = getStoredTheme();
 });
 
 function switchScheme(newMode: LIGHT_DARK_MODE) {
@@ -60,7 +60,10 @@ if (typeof window !== "undefined") {
 	} else {
 		document.addEventListener("swup:enable", () => {
 			if ((window as any).swup && (window as any).swup.hooks) {
-				(window as any).swup.hooks.on("content:replace", handleContentReplace);
+				(window as any).swup.hooks.on(
+					"content:replace",
+					handleContentReplace,
+				);
 			}
 		});
 	}

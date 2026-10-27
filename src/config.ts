@@ -33,7 +33,14 @@ export const siteConfig: SiteConfig = {
 		"都内在住限界オタクフロントエンドエンジニア hirekatsu の個人メモブログです。",
 	// カスタムドメインは使わない。公開先は Cloudflare Pages のこのURL。
 	siteURL: "https://cheese-nan.pages.dev",
-	keywords: [SITE_TITLE, "チーズナン", "hirekatsu", "備忘録", "フロントエンド", "東京"],
+	keywords: [
+		SITE_TITLE,
+		"チーズナン",
+		"hirekatsu",
+		"備忘録",
+		"フロントエンド",
+		"東京",
+	],
 	// Search Console の「HTMLタグ」方式。content の値だけを入れる。空ならタグは出さない。
 	googleSiteVerification: "",
 	// TODO: このサイトを公開した日に合わせて変える。サイドバーの稼働日数に使う。

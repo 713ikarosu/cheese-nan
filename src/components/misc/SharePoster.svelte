@@ -160,12 +160,24 @@ async function generatePoster() {
 		let descHeight = 0;
 		if (description) {
 			ctx.font = `${descFontSize}px ${FONT_FAMILY}`;
-			const descLines = getLines(ctx, description, CONTENT_WIDTH - 16 * SCALE);
+			const descLines = getLines(
+				ctx,
+				description,
+				CONTENT_WIDTH - 16 * SCALE,
+			);
 			descHeight = Math.min(descLines.length, 6) * (25 * SCALE);
 		}
 
-		const canvasHeight = coverHeight + PADDING + titleHeight + 16 * SCALE + descHeight +
-			(description ? 24 * SCALE : 8 * SCALE) + 24 * SCALE + footerHeight + PADDING;
+		const canvasHeight =
+			coverHeight +
+			PADDING +
+			titleHeight +
+			16 * SCALE +
+			descHeight +
+			(description ? 24 * SCALE : 8 * SCALE) +
+			24 * SCALE +
+			footerHeight +
+			PADDING;
 
 		canvas.width = WIDTH;
 		canvas.height = canvasHeight;
@@ -182,7 +194,13 @@ async function generatePoster() {
 		ctx.arc(WIDTH - 25 * SCALE, 25 * SCALE, 75 * SCALE, 0, Math.PI * 2);
 		ctx.fill();
 		ctx.beginPath();
-		ctx.arc(10 * SCALE, canvas.height - 10 * SCALE, 50 * SCALE, 0, Math.PI * 2);
+		ctx.arc(
+			10 * SCALE,
+			canvas.height - 10 * SCALE,
+			50 * SCALE,
+			0,
+			Math.PI * 2,
+		);
 		ctx.fill();
 		ctx.restore();
 
@@ -203,7 +221,17 @@ async function generatePoster() {
 				sx = 0;
 				sy = (coverImg.height - sHeight) / 2;
 			}
-			ctx.drawImage(coverImg, sx, sy, sWidth, sHeight, 0, 0, WIDTH, coverHeight);
+			ctx.drawImage(
+				coverImg,
+				sx,
+				sy,
+				sWidth,
+				sHeight,
+				0,
+				0,
+				WIDTH,
+				coverHeight,
+			);
 		} else {
 			ctx.save();
 			ctx.fillStyle = themeColor;
@@ -221,14 +249,25 @@ async function generatePoster() {
 			const dateBoxY = coverHeight - dateBoxH;
 
 			ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
-			drawRoundedRect(ctx, dateBoxX, dateBoxY, dateBoxW, dateBoxH, 4 * SCALE);
+			drawRoundedRect(
+				ctx,
+				dateBoxX,
+				dateBoxY,
+				dateBoxW,
+				dateBoxH,
+				4 * SCALE,
+			);
 			ctx.fill();
 
 			ctx.fillStyle = "#ffffff";
 			ctx.textAlign = "center";
 			ctx.textBaseline = "middle";
 			ctx.font = `700 ${30 * SCALE}px ${FONT_FAMILY}`;
-			ctx.fillText(dateObj.day, dateBoxX + dateBoxW / 2, dateBoxY + 24 * SCALE);
+			ctx.fillText(
+				dateObj.day,
+				dateBoxX + dateBoxW / 2,
+				dateBoxY + 24 * SCALE,
+			);
 
 			ctx.beginPath();
 			ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
@@ -238,7 +277,11 @@ async function generatePoster() {
 			ctx.stroke();
 
 			ctx.font = `${10 * SCALE}px ${FONT_FAMILY}`;
-			ctx.fillText(`${dateObj.year} ${dateObj.month}`, dateBoxX + dateBoxW / 2, dateBoxY + 51 * SCALE);
+			ctx.fillText(
+				`${dateObj.year} ${dateObj.month}`,
+				dateBoxX + dateBoxW / 2,
+				dateBoxY + 51 * SCALE,
+			);
 		}
 
 		// Title
@@ -256,12 +299,23 @@ async function generatePoster() {
 		// Description
 		if (description) {
 			ctx.fillStyle = "#e5e7eb";
-			drawRoundedRect(ctx, PADDING, drawY - 8 * SCALE, 4 * SCALE, descHeight + 8 * SCALE, 2 * SCALE);
+			drawRoundedRect(
+				ctx,
+				PADDING,
+				drawY - 8 * SCALE,
+				4 * SCALE,
+				descHeight + 8 * SCALE,
+				2 * SCALE,
+			);
 			ctx.fill();
 
 			ctx.font = `${descFontSize}px ${FONT_FAMILY}`;
 			ctx.fillStyle = "#4b5563";
-			const descLines = getLines(ctx, description, CONTENT_WIDTH - 16 * SCALE);
+			const descLines = getLines(
+				ctx,
+				description,
+				CONTENT_WIDTH - 16 * SCALE,
+			);
 			for (const line of descLines.slice(0, 6)) {
 				ctx.fillText(line, PADDING + 16 * SCALE, drawY);
 				drawY += 25 * SCALE;
@@ -297,7 +351,13 @@ async function generatePoster() {
 		if (qrImg) {
 			const qrInnerSize = 76 * SCALE;
 			const qrPadding = (qrSize - qrInnerSize) / 2;
-			ctx.drawImage(qrImg, qrX + qrPadding, footerY + qrPadding, qrInnerSize, qrInnerSize);
+			ctx.drawImage(
+				qrImg,
+				qrX + qrPadding,
+				footerY + qrPadding,
+				qrInnerSize,
+				qrInnerSize,
+			);
 		}
 
 		// Avatar
@@ -306,14 +366,26 @@ async function generatePoster() {
 			const avatarSize = 64 * SCALE;
 			const avatarX = PADDING;
 			ctx.beginPath();
-			ctx.arc(avatarX + avatarSize / 2, footerY + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2);
+			ctx.arc(
+				avatarX + avatarSize / 2,
+				footerY + avatarSize / 2,
+				avatarSize / 2,
+				0,
+				Math.PI * 2,
+			);
 			ctx.closePath();
 			ctx.clip();
 			ctx.drawImage(avatarImg, avatarX, footerY, avatarSize, avatarSize);
 			ctx.restore();
 
 			ctx.beginPath();
-			ctx.arc(avatarX + avatarSize / 2, footerY + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2);
+			ctx.arc(
+				avatarX + avatarSize / 2,
+				footerY + avatarSize / 2,
+				avatarSize / 2,
+				0,
+				Math.PI * 2,
+			);
 			ctx.strokeStyle = "#ffffff";
 			ctx.lineWidth = 2 * SCALE;
 			ctx.stroke();

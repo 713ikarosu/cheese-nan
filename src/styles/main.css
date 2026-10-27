@@ -1,16 +1,16 @@
-@import 'tailwindcss';
-@import '@fontsource-variable/jetbrains-mono/wght.css';
-@import './quiet-log.css';
+@import "tailwindcss";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
+@import "./quiet-log.css";
 
 /* 导入相册样式 */
-@import './albums.css';
+@import "./albums.css";
 /* 导入追番页面样式 */
-@import './anime.css';
+@import "./anime.css";
 /* 导入动画样式 */
-@import './transition.css';
-@import './animation-enhancements.css';
+@import "./transition.css";
+@import "./animation-enhancements.css";
 /* 导入渐变按钮样式 */
-@import './gradient-buttons.css';
+@import "./gradient-buttons.css";
 /* 加密内容样式已移除，现在直接使用非加密文章的样式 */
 
 @plugin "@tailwindcss/typography";
@@ -19,9 +19,7 @@
 
 /* Migrate from v3 config */
 @theme {
-  --font-sans:
-    "Zen Kaku Gothic New", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: "Zen Kaku Gothic New", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --breakpoint-md: 768px;
   --breakpoint-lg: 1280px;
@@ -32,7 +30,7 @@
   position: relative;
   z-index: 0;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
@@ -87,12 +85,12 @@
 
 /* 确保平滑滚动 */
 html {
-	@apply scroll-smooth;
-	@apply text-black/80;
+  @apply scroll-smooth;
+  @apply text-black/80;
 
-	&.dark {
-		@apply text-white/80;
-	}
+  &.dark {
+    @apply text-white/80;
+  }
 }
 
 /* 页面顶部渐变高光效果 */
@@ -378,15 +376,13 @@ html {
   }
 
   .btn-card {
-    @apply transition-colors duration-150 flex items-center justify-center bg-(--card-bg) hover:bg-(--btn-card-bg-hover)
-        active:bg-(--btn-card-bg-active);
+    @apply transition-colors duration-150 flex items-center justify-center bg-(--card-bg) hover:bg-(--btn-card-bg-hover) active:bg-(--btn-card-bg-active);
   }
   .btn-card.disabled {
     @apply pointer-events-none text-black/10 dark:text-white/10;
   }
   .btn-plain {
-    @apply transition-colors duration-150 relative flex items-center justify-center bg-none
-        text-black/75 hover:text-(--primary) dark:text-white/75 dark:hover:text-(--primary);
+    @apply transition-colors duration-150 relative flex items-center justify-center bg-none text-black/75 hover:text-(--primary) dark:text-white/75 dark:hover:text-(--primary);
     &:not(.scale-animation) {
       @apply hover:bg-(--btn-plain-bg-hover) active:bg-(--btn-plain-bg-active);
     }
@@ -395,13 +391,11 @@ html {
     }
   }
   .btn-regular {
-    @apply transition-colors duration-150 flex items-center justify-center bg-(--btn-regular-bg) hover:bg-(--btn-regular-bg-hover) active:bg-(--btn-regular-bg-active)
-        text-(--btn-content) dark:text-white/75;
+    @apply transition-colors duration-150 flex items-center justify-center bg-(--btn-regular-bg) hover:bg-(--btn-regular-bg-hover) active:bg-(--btn-regular-bg-active) text-(--btn-content) dark:text-white/75;
   }
 
   .link-underline {
-    @apply transition-colors duration-150 underline decoration-2 decoration-dashed decoration-(--link-underline)
-        hover:decoration-(--link-hover) active:decoration-(--link-active) underline-offset-[0.25rem];
+    @apply transition-colors duration-150 underline decoration-2 decoration-dashed decoration-(--link-underline) hover:decoration-(--link-hover) active:decoration-(--link-active) underline-offset-[0.25rem];
   }
 
   .toc-hide,
@@ -541,18 +535,14 @@ html {
   }
 
   .meta-icon {
-    @apply w-8 h-8 transition-colors duration-150 rounded-md flex items-center justify-center bg-(--btn-regular-bg)
-        text-(--btn-content) mr-2;
+    @apply w-8 h-8 transition-colors duration-150 rounded-md flex items-center justify-center bg-(--btn-regular-bg) text-(--btn-content) mr-2;
   }
   .with-divider {
-    @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-(--meta-divider) before:text-sm
-        before:font-medium before:first-of-type:hidden before:transition-colors before:duration-150;
+    @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-(--meta-divider) before:text-sm before:font-medium before:first-of-type:hidden before:transition-colors before:duration-150;
   }
 
   .btn-regular-dark {
-    @apply flex items-center justify-center
-        bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
-        dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))];
+    @apply flex items-center justify-center bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))] dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))];
   }
   .btn-regular-dark.success {
     @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))];
@@ -598,6 +588,7 @@ html {
 }
 
 /*剧透效果*/
+/* biome-ignore lint/correctness/noUnknownTypeSelector: theme uses a spoiler element */
 .custom-md spoiler {
   --_spoiler-mask: var(--primary);
   @apply hover:bg-transparent px-1 py-0.5 overflow-hidden rounded-md transition-all duration-150;
@@ -769,6 +760,7 @@ html {
 .post-list-container {
   transition: all 0.3s ease-in-out;
 }
+/* biome-ignore lint/correctness/noUnknownTypeSelector: theme uses a spoiler element */
 :root:not(.dark) .custom-md spoiler {
   --_spoiler-mask: color-mix(in oklch, var(--primary) 55%, white 45%);
 }

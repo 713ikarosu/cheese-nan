@@ -57,9 +57,7 @@ html.dark {
   .tk-preview,
   .tk-send,
   .tk-cancel {
-    @apply border-none rounded-lg px-3 py-0 h-8
-       bg-(--btn-regular-bg-active)! disabled:bg-(--btn-regular-bg)!
-      text-(--btn-content)! disabled:text-[#ffffffa1]!;
+    @apply border-none rounded-lg px-3 py-0 h-8 bg-(--btn-regular-bg-active)! disabled:bg-(--btn-regular-bg)! text-(--btn-content)! disabled:text-[#ffffffa1]!;
   }
 }
 

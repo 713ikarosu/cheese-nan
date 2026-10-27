@@ -51,7 +51,7 @@
 .anime-grid-container.anime-list-mode .anime-cover-container {
   width: 8.5rem;
   height: auto;
-  aspect-ratio: 2/3;
+  aspect-ratio: 2 / 3;
   flex-shrink: 0;
 }
 @media (min-width: 768px) {
