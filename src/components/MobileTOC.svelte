@@ -35,7 +35,8 @@ const setPanelVisibility = async (show: boolean): Promise<void> => {
 
 const generateTOC = () => {
 	// 获取配置
-	useJapaneseBadge = (window as any).siteConfig?.toc?.useJapaneseBadge || false;
+	useJapaneseBadge =
+		(window as any).siteConfig?.toc?.useJapaneseBadge || false;
 	tocDepth = (window as any).siteConfig?.toc?.depth || 3;
 
 	const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
@@ -110,15 +111,20 @@ const generatePostList = () => {
 
 	postCards.forEach((card) => {
 		// 查找标题链接
-		const titleLink = card.querySelector('a[href*="/posts/"].transition.group');
+		const titleLink = card.querySelector(
+			'a[href*="/posts/"].transition.group',
+		);
 		// 查找分类链接
-		const categoryLink = card.querySelector('a[href*="/categories/"].link-lg');
+		const categoryLink = card.querySelector(
+			'a[href*="/categories/"].link-lg',
+		);
 		// 查找置顶图标
 		const pinnedIcon = titleLink?.querySelector('svg[data-icon="mdi:pin"]');
 
 		if (titleLink) {
 			const href = titleLink.getAttribute("href");
-			const title = titleLink.textContent?.replace(/\s+/g, " ").trim() || "";
+			const title =
+				titleLink.textContent?.replace(/\s+/g, " ").trim() || "";
 			const category = categoryLink?.textContent?.trim() || "";
 			const pinned = !!pinnedIcon;
 

@@ -4,7 +4,7 @@ import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { navigateToPage } from "@utils/navigation-utils";
 import { url } from "@utils/url-utils";
-import { onMount, onDestroy } from "svelte";
+import { onDestroy, onMount } from "svelte";
 import type { SearchResult } from "@/global";
 
 let keywordDesktop = $state("");
@@ -49,7 +49,9 @@ const toggleDesktopSearch = () => {
 	isDesktopSearchExpanded = !isDesktopSearchExpanded;
 	if (isDesktopSearchExpanded) {
 		setTimeout(() => {
-			const input = document.getElementById("search-input-desktop") as HTMLInputElement;
+			const input = document.getElementById(
+				"search-input-desktop",
+			) as HTMLInputElement;
 			input?.focus();
 		}, 0);
 	}
@@ -117,7 +119,9 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 			searchResults = fakeResult;
 		} else {
 			searchResults = [];
-			console.error("Pagefind is not available in production environment.");
+			console.error(
+				"Pagefind is not available in production environment.",
+			);
 		}
 		result = searchResults;
 		setPanelVisibility(result.length > 0, isDesktop);
@@ -171,10 +175,10 @@ onMount(() => {
 		}, 500); // 500ms 后才允许 mouseenter 触发展开
 	};
 
-	window.addEventListener('focus', handleFocus);
+	window.addEventListener("focus", handleFocus);
 
 	return () => {
-		window.removeEventListener('focus', handleFocus);
+		window.removeEventListener("focus", handleFocus);
 	};
 });
 
@@ -196,20 +200,20 @@ $effect(() => {
 });
 
 $effect(() => {
-	if (typeof document !== 'undefined') {
-		const navbar = document.getElementById('navbar');
+	if (typeof document !== "undefined") {
+		const navbar = document.getElementById("navbar");
 		if (isDesktopSearchExpanded) {
-			navbar?.classList.add('is-searching');
+			navbar?.classList.add("is-searching");
 		} else {
-			navbar?.classList.remove('is-searching');
+			navbar?.classList.remove("is-searching");
 		}
 	}
 });
 
 onDestroy(() => {
-	if (typeof document !== 'undefined') {
-		const navbar = document.getElementById('navbar');
-		navbar?.classList.remove('is-searching');
+	if (typeof document !== "undefined") {
+		const navbar = document.getElementById("navbar");
+		navbar?.classList.remove("is-searching");
 	}
 	clearTimeout(debounceTimer);
 	clearTimeout(focusTimer);

@@ -140,7 +140,8 @@ export const ja: Translation = {
 
 	// プロジェクトページ
 	[Key.projects]: "作ったもの",
-	[Key.projectsSubtitle]: "作ったものをまとめています。実在の実績はまだ書いていません。",
+	[Key.projectsSubtitle]:
+		"作ったものをまとめています。実在の実績はまだ書いていません。",
 	[Key.projectsAll]: "すべて",
 	[Key.projectsWeb]: "Web",
 	[Key.projectsMobile]: "モバイルアプリ",
@@ -175,8 +176,7 @@ export const ja: Translation = {
 	[Key.rssCopyLink]: "コピー",
 	[Key.rssLatestPosts]: "最近の記事",
 	[Key.rssWhatIsRSS]: "RSS",
-	[Key.rssWhatIsRSSDescription]:
-		"サイトの更新を配るための形式です。",
+	[Key.rssWhatIsRSSDescription]: "サイトの更新を配るための形式です。",
 	[Key.rssBenefit1]: "サイトを開きにいかなくても、更新が分かります。",
 	[Key.rssBenefit2]: "いくつかのサイトを、同じリーダーで読めます。",
 	[Key.rssBenefit3]: "更新を見逃しにくくなります。",
@@ -202,8 +202,7 @@ export const ja: Translation = {
 	[Key.atomBenefit2]: "いくつかのサイトを、同じリーダーで読めます。",
 	[Key.atomBenefit3]: "更新を見逃しにくくなります。",
 	[Key.atomBenefit4]: "記事の本文だけを読めます。",
-	[Key.atomHowToUse]:
-		"ふだん使っているリーダーにURLを追加してください。",
+	[Key.atomHowToUse]: "ふだん使っているリーダーにURLを追加してください。",
 	[Key.atomCopied]: "AtomのURLをコピーしました。",
 	[Key.atomCopyFailed]:
 		"コピーできませんでした。URLを選んでコピーしてください。",
