@@ -473,10 +473,11 @@ function portal(node: HTMLElement) {
 </script>
 
 <button 
-  class="btn-regular px-6 py-3 rounded-lg inline-flex items-center gap-2"
+  class="btn-regular h-10 px-3 rounded-lg inline-flex items-center gap-2 text-sm"
   on:click={generatePoster}
   aria-label={i18n(I18nKey.shareArticle)}
 >
+  <Icon icon="material-symbols:share" class="text-lg text-(--primary)" />
   <span>{i18n(I18nKey.shareArticle)}</span>
 </button>
 

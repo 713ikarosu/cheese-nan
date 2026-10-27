@@ -303,35 +303,18 @@ const jsonLd = {
             }
 
             {shareConfig.enable && (
-                <div id="share-component" class:list={["p-6 bg-(--license-block-bg) rounded-xl mb-6 onload-animation", { "encrypted-hidden": isEncrypted }]}>
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div class="flex items-center gap-3 flex-1">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-lg bg-(--enter-btn-bg)">
-                                <Icon
-                                    name="material-symbols:share"
-                                    class="text-3xl text-(--primary)"
-                                />
-                            </div>
-                            <div class="flex flex-col gap-1">
-                                <div class="text-[1.0rem] leading-tight text-black/75 dark:text-white/75">
-                                    {i18n(I18nKey.shareOnSocial)}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <SharePoster
-                                client:load
-                                title={entry.data.title}
-                                author={entry.data.author || profileConfig.name}
-                                description={entry.data.description || ""}
-                                pubDate={formatDateToYYYYMMDD(entry.data.published)}
-                                coverImage={posterCoverUrl}
-                                url={Astro.url.toString()}
-                                siteTitle={siteConfig.title}
-                                avatar={posterAvatarUrl}
-                            />
-                        </div>
-                    </div>
+                <div id="share-component" class:list={["mb-6 onload-animation", { "encrypted-hidden": isEncrypted }]}>
+                    <SharePoster
+                        client:load
+                        title={entry.data.title}
+                        author={entry.data.author || profileConfig.name}
+                        description={entry.data.description || ""}
+                        pubDate={formatDateToYYYYMMDD(entry.data.published)}
+                        coverImage={posterCoverUrl}
+                        url={Astro.url.toString()}
+                        siteTitle={siteConfig.title}
+                        avatar={posterAvatarUrl}
+                    />
                 </div>
             )}
 
